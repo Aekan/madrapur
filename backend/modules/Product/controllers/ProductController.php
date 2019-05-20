@@ -681,7 +681,7 @@ class ProductController extends Controller {
                             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                             $response=curl_exec($curl);
 
-                            curl_close($curl);
+
                             }//ToDo not only eu
                         }
 
@@ -717,7 +717,7 @@ class ProductController extends Controller {
                             $response = curl_exec($curl);
 
 
-                            curl_close($curl);
+
                         }//Todo no only eu
                     }
                 }
