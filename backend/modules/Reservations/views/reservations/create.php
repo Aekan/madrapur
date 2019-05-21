@@ -21,7 +21,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <?php $form = ActiveForm::begin(['id' => 'product-form']); ?>
+    <?php
+    if($disableForm!=1){
+
+    $form = ActiveForm::begin(['id' => 'product-form']);
+
+
+    ?>
 
 
     <?php
@@ -59,7 +65,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::submitButton('Create Reservation', ['class' => 'btn btn-primary prodUpdateBtn']) ?>
 
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); }
+    else{
+        $form = ActiveForm::begin(['id' => 'product-form']);
+        $model=new \backend\modules\Product\models\ProductPrice();
+        var_dump($myPrices);
+        echo '</br>';
+        foreach($myPrices as $i=>$price){
+            echo $price->name;
+            echo $form->field($model, "description[$i]")->widget(\kartik\touchspin\TouchSpin::class,['options' => ['placeholder' => 'Adjust ...'],]);
+
+
+        }
+
+
+         ActiveForm::end();
+    }
+
+
+
+
+
+    ?>
 
 </div>
 

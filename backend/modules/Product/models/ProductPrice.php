@@ -38,7 +38,7 @@ class ProductPrice extends MadActiveRecord{
             'name' => Yii::t('app', 'Name'),
             'price' => Yii::t('app', 'Price'),
             'discount' => Yii::t('app', 'Discount'),
-            'description' => Yii::t('app', 'Description'),
+            'description' => Yii::t('app', ''),
         ];
     }
 

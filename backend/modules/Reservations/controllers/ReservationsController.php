@@ -169,8 +169,12 @@ class ReservationsController extends Controller {
         $searchModel = new ReservationsAdminSearchModel();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $product=Yii::$app->request->post('Product');
+        $disableForm=0;
+        $myprices=[];
         if($product){
-
+            $disableForm=1;
+            $query=ProductPrice::aSelect(ProductPrice::class,'*',ProductPrice::tableName(),'product_id='.$product['title']);
+            $myprices=$query->all();
 
 
         }
@@ -181,6 +185,9 @@ class ReservationsController extends Controller {
             'allProduct'=>$allProduct,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'disableForm'=>$disableForm,
+            'myPrices'=>$myprices
+
         ]);
     }
 
