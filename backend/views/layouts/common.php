@@ -381,6 +381,15 @@ echo Menu::widget(
                                 ],
                                 'icon' => '<i class="fa fa-ticket"></i>',
                                 'active' => (Yii::$app->controller->id == 'reservations'),
+                                'items' => [
+                                    [
+                                        'label' => Yii::t('backend', 'Create'),
+                                        'url' => [
+                                            '/Reservations/reservations/create'
+                                        ],
+                                        'icon' => '<i class="fa fa-database"></i>',
+                                        'active' => (Yii::$app->controller->id == 'create'),
+                                    ],],
                             ],
                             [
                                 'label' => Yii::t('backend', 'Key-Value Storage'),

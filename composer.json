@@ -74,7 +74,8 @@
 		"cranetm/yii2-json-rpc-2.0": "^1.2",
 		"philippfrenzel/yii2fullcalendar": "3.9.0",
 		"kartik-v/yii2-widget-colorinput": "^1.0",
-		"himiklab/yii2-jqgrid-widget": "^1.2"
+		"himiklab/yii2-jqgrid-widget": "^1.2",
+		"kartik-v/yii2-widget-touchspin": "dev-master"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "~2.0.0",

@@ -3,6 +3,9 @@ namespace backend\modules\Reservations\controllers;
 
 use backend\controllers\Controller;
 use backend\modules\MadActiveRecord\models\MadActiveRecord;
+use backend\modules\Product\models\Product;
+use backend\modules\Product\models\ProductPrice;
+use backend\modules\Product\models\ProductTime;
 use backend\modules\Reservations\models\Reservations;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Yii;
@@ -159,6 +162,53 @@ class ReservationsController extends Controller {
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionCreate() {
+        $allProduct=Product::getAllProducts();
+
+        $searchModel = new ReservationsAdminSearchModel();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $product=Yii::$app->request->post('Product');
+        if($product){
+
+
+
+        }
+
+
+        return $this->render('create', [
+            'model'=>new Product(),
+            'allProduct'=>$allProduct,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+
+    public function actionGettimes(){
+        if (Yii::$app->request->isAjax) {
+        $data=Yii::$app->request->post();
+        $id=$data['id'];
+        $query=ProductTime::aSelect(ProductTime::class,'*',ProductTime::tableName(),'product_id='.$id);
+        $mytimes=$query->all();
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return [
+            'search' => $mytimes,
+        ];
+        }
+
+    }
+    public function actionGetprices(){
+        if (Yii::$app->request->isAjax) {
+            $data=Yii::$app->request->post();
+            $id=$data['id'];
+            $query=ProductPrice::aSelect(ProductPrice::class,'*',ProductPrice::tableName(),'product_id='.$id);
+            $myprices=$query->all();
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $this->renderPartial('prices');
+        }
+
     }
     public function actionBookingedit(){
 
