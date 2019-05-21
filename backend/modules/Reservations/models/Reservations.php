@@ -73,30 +73,29 @@ class Reservations extends MadActiveRecord
             if(isset($myjson->orderDetails->edited_first_name)){
                 $this->setAttribute("firstName",$myjson->orderDetails->edited_first_name);
             }else{
-                $this->setAttribute("firstName",$myjson->orderDetails->billing_first_name);
-            }
+
+                }
             if(isset($myjson->orderDetails->edited_last_name)){
                 $this->setAttribute("lastName",$myjson->orderDetails->edited_last_name);
             }else{
-                $this->setAttribute("lastName",$myjson->orderDetails->billing_last_name);
+
             }
             if(isset($myjson->orderDetails->edited_AllPersons)){
                 $this->setAttribute("bookedChairsCount",$myjson->orderDetails->edited_AllPersons);
             }else{
-                $this->setAttribute("bookedChairsCount",$myjson->orderDetails->allPersons);
+
             }
             if(isset($myjson->boookingDetails->edited_booking_cost)){
                 $this->setAttribute("bookingCost",$myjson->boookingDetails->edited_booking_cost);
             }else{
-                if(isset($myjson->boookingDetails)){
-                    $this->setAttribute("bookingCost",$myjson->boookingDetails->booking_cost);
+                if(isset($myjson->boookingDetails)){$this->setAttribute("bookingCost",$myjson->boookingDetails->booking_cost);
                 }
 
             }
             if(isset($myjson->orderDetails->edited_order_currency)){
                 $this->setAttribute("orderCurrency",$myjson->orderDetails->edited_order_currency);
             }else{
-                $this->setAttribute("orderCurrency",$myjson->orderDetails->order_currency);
+
             }
             if(isset($myjson->orderDetails->edited_source_name)){
                 $this->setAttribute("sourceName",$myjson->orderDetails->edited_source_name);

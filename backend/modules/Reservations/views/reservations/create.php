@@ -77,13 +77,16 @@ $this->params['breadcrumbs'][] = $this->title;
         foreach($myPrices as $i=>$price){
             echo $price->name;
             $currentProdId=(Yii::$app->request->post('Product'))['title'];
-            echo $form->field($model, "description[$price->id]")->widget(\kartik\touchspin\TouchSpin::class,['options' => ['placeholder' => 'Adjust ...','data-priceid'=>$price->id]]);
-            echo $form->field($model,'product_id')->hiddeninput(['value' => $currentProdId])->label(false);;
-            echo $form->field($model,'booking_date')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['start_date']])->label(false);;
-            echo $form->field($model,'time_name')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['times']])->label(false);;
+            echo $form->field($model, "description[$i]")->widget(\kartik\touchspin\TouchSpin::class,['options' => ['placeholder' => 'Adjust ...','data-priceid'=>$price->id]]);
 
 
         }
+        echo $form->field($model,'product_id')->hiddeninput(['value' => $currentProdId])->label(false);
+        echo $form->field($model,'booking_date')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['start_date']])->label(false);
+        echo $form->field($model,'time_name')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['times']])->label(false);
+
+        echo $form->field($model,'discount')->hiddeninput()->label(false);
+
         echo 'Total Price:<div id="total_price"></div>';
         echo Html::submitButton('Create Reservation', ['class' => 'btn btn-primary prodUpdateBtn']);
          ActiveForm::end();
@@ -172,6 +175,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
         }
         ?>
+
+        function gatherPrices() {
+            var PricesObj = {}; // note this
+            var i =0;
+            while(i<countPrices){
+                PricesObj[$('#productprice-description-'+i).attr('data-priceid')] =  $('#productprice-description-'+i).val();
+                i=i+1
+            }
+
+            return PricesObj;
+
+        }
+
         var Total=0;
         $('#product-form').change(function(){
             $.ajax({
@@ -186,6 +202,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     console.log(data.search);
                     mytimes=data.search
                     $('#total_price').html(mytimes);
+                    $('#productprice-discount').val(mytimes);
 
 
 

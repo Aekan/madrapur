@@ -170,6 +170,8 @@ class ReservationsController extends Controller {
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $product=Yii::$app->request->post('Product');
         $productPrice=Yii::$app->request->post('ProductPrice');
+        $totalprice=0;
+
         $disableForm=0;
         $myprices=[];
         if($product){
@@ -185,14 +187,79 @@ class ReservationsController extends Controller {
         if($productPrice){
 
             $newReservarion= new Reservations();
+
+             $data=new \stdClass();
+             $data->boookingDetails=new \stdClass();
+             $data->orderDetails=new \stdClass();
+             $data->personInfo=[];
+             $data->updateDate=date('Y-m-d h:m:s');
+
+             $query=ProductPrice::aSelect(ProductPrice::class,'*',ProductPrice::tableName(),'product_id='.$productPrice["product_id"]);
+             $myprices=$query->all();
+             foreach ($myprices as $i=>$price){
+                 if($productPrice['description'][$i]){
+                     $newObj=new \stdClass();
+                     $newObj->name=$price->name;
+                     $newObj->purchaseNumber=$productPrice['description'][$i];
+                     $newObj->oneCost=$price->price;
+                     $data->personInfo[]=$newObj;
+
+
+                 }
+             }
+
+
+
+
+
+            $countPersons=0;
+             foreach ($productPrice['description'] as $price){
+                 if($price){
+                     $countPersons+=$price;
+                 }
+             }
+             #echo $countPersons;
+
+
+
+            #var_dump($data);
+             $data->boookingDetails->booking_cost=$productPrice["discount"];
+             $data->boookingDetails->booking_product_id=$productPrice["product_id"];
+             $data->boookingDetails->booking_start=$productPrice['booking_date'].' '.$productPrice['time_name'].':00';
+             $data->boookingDetails->booking_end=$productPrice['booking_date'].' '.$productPrice['time_name'].':00';
+             $data->orderDetails->paid_date=date('Y-m-d');
+             $data->orderDetails->allPersons=$countPersons;
+             $data->orderDetails->order_currency='EUR';
+
+
+
+
+
+
+           # $data=['boookingDetails'=> $booking->bookingDetails,'orderDetails'=>$booking->orderDetails,'personInfo'=>$booking->personInfo,'updateDate'=>date("Y-m-d H:i:s")];
+
+            $data=json_encode($data);
+
+
+
+
             $values=[
                 'invoiceDate'=>date('Y-m-d'),
                 'bookingDate'=>$productPrice['booking_date'],
                 'source'=>'Utca',
                 'productId'=>$productPrice['product_id'],
+                'bookingId'=>'tmpMad5',
+                'data'=>$data,
             ];
-            $updateResponse='';
-                if (Reservations::insertOne($newReservarion, $values)) {
+                $insertReservation=Reservations::insertOne($newReservarion, $values);
+
+                if ($insertReservation) {
+                    $findBooking=Reservations::aSelect(Reservations::class,'*',Reservations::tableName(),'bookingId="tmpMad5"');
+                    $booking=$findBooking->one();
+                    $values=['bookingId'=>$booking->id];
+                    Reservations::insertOne($booking,$values);
+
+
                     $updateResponse = '<span style="color:green">Reservation Successful</span>';
                 } else {
                     $updateResponse = '<span style="color:red">Reservation Failed</span>';
@@ -203,7 +270,9 @@ class ReservationsController extends Controller {
 
 
         }
-
+        if(!isset($updateResponse)){
+            $updateResponse='';
+        }
         return $this->render('create', [
             'model'=>new Product(),
             'allProduct'=>$allProduct,
