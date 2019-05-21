@@ -176,7 +176,6 @@ class ReservationsController extends Controller {
             $query=ProductPrice::aSelect(ProductPrice::class,'*',ProductPrice::tableName(),'product_id='.$product['title']);
             $myprices=$query->all();
 
-
         }
 
 

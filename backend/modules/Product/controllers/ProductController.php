@@ -709,19 +709,49 @@ class ProductController extends Controller {
 
                 $veglegesdates=$dates;
 
+
+
+
                 foreach($veglegesdates as $i=>$date){
 
 
                     foreach ($sources as $source){
                         if($source['url']=='https://budapestrivercruise.eu') {
+
+
+
                             $myurl = $source['url'];
                             $myprodid = $source['prodIds'];
-                            $curlUrl = $myurl . '/wp-json/block/v1/start/' . $date . '/end/' . $date . '/id/' . $myprodid;
-                            $curl = curl_init($curlUrl);
-                            curl_setopt($curl, CURLOPT_HEADER, 0);
-                             curl_setopt($curl, CURLOPT_VERBOSE, 0);
-                              curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                            $response = curl_exec($curl);
+                            /**
+                             * Először Vizsgálom hogy már fel van e küldve
+                             */
+                            $askURL = $myurl . '/wp-json/getav/v1/id/'. $myprodid;
+                            $curlAsk = curl_init($askURL);
+                            curl_setopt($curlAsk, CURLOPT_HEADER, 0);
+                            curl_setopt($curlAsk, CURLOPT_VERBOSE, 0);
+                            curl_setopt($curlAsk, CURLOPT_RETURNTRANSFER, true);
+                            $response = curl_exec($curlAsk);
+                            $alreadyblocked=json_decode($response)[0];
+                            $alreadyBlockedArray=[];
+
+                            foreach($alreadyblocked as $blockedDate){
+                                if($blockedDate->bookable=='no' && $blockedDate->from==$blockedDate->to){
+                                    $alreadyBlockedArray[]=$blockedDate->from;
+                                }
+
+                            }
+
+                            if(!in_array($date,$alreadyBlockedArray)){
+                                $curlUrl = $myurl . '/wp-json/block/v1/start/' . $date . '/end/' . $date . '/id/' . $myprodid;
+                                $curl = curl_init($curlUrl);
+                                curl_setopt($curl, CURLOPT_HEADER, 0);
+                                curl_setopt($curl, CURLOPT_VERBOSE, 0);
+                                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                                $response = curl_exec($curl);
+                            }
+
+
+
 
 
 
@@ -764,69 +794,6 @@ class ProductController extends Controller {
         }
 
 
-/*
-        if ($productPostedBlockouts) {
-
-
-
-            foreach ($productPostedPrices as $postedPrice):
-                if ($postedPrice['start_date'] == 'NULL' || $postedPrice['start_date'] == '') {
-                    $postedPrice['start_date'] = date("Y-m-d");
-                }
-                if ($postedPrice['end_date'] == 'NULL' || $postedPrice['end_date'] == '') {
-                    $postedPrice['end_date'] = date("Y-m-d");
-                }
-
-
-                $values = [
-                    'name' => $postedPrice['name'],
-                    'description' => $postedPrice['description'],
-                    'start_date' => $postedPrice['start_date'],
-                    'end_date' => $postedPrice['end_date'],
-                    'discount' => $postedPrice['discount'],
-                    'price' => $postedPrice['price'],
-                    'product_id' => $prodId,
-                    'id' => $postedPrice['id']
-                ];
-
-
-                $query = ProductPrice::aSelect(ProductPrice::class, '*', ProductPrice::tableName(), 'product_id=' . $prodId . ' and id="' . $values['id'] . '"');
-
-                try {
-                    $rows = $query->one();
-
-                } catch (Exception $e) {
-                }
-                if (isset($rows)) {
-                    $newPrice = $rows;
-                    //letezao productot updatelunk
-                } else {
-                    $newPrice = new ProductPrice();
-
-
-                }
-
-
-                if (Product::insertOne($newPrice, $values)) {
-                    $updateResponse = 1;
-
-                } else {
-                    $updateResponse = 0;
-
-                    //show an error message
-                }
-
-
-            endforeach;
-
-
-        }
-
-*/
-
-
-
-
 
 
 
@@ -849,36 +816,6 @@ class ProductController extends Controller {
         }
 
         /*update sources*/
-
-        if(Yii::$app->request->get('update')=='all'){
-
-            $dates=explode(',',$model->dates);
-            foreach($dates as $i=>$date){
-
-
-                $source='https://budapestrivercruise.eu';
-
-                $url=$source.'/wp-json/block/v1/start/'.$date.'/end/'.$date.'/id/'.'30649';
-
-                $curl=curl_init($url);
-                curl_setopt($curl, CURLOPT_HEADER, 0);
-                curl_setopt($curl, CURLOPT_VERBOSE, 0);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-                $response=curl_exec($curl);
-
-                curl_close($curl);
-
-                $jsonResponse=json_decode(utf8_decode($response));
-
-
-            }
-        }
-
-        if(isset($jsonResponse)){
-            $returnMessage='Eu updated an product dates blocked';
-
-        }
 
 
 

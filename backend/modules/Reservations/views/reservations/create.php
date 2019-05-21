@@ -74,10 +74,13 @@ $this->params['breadcrumbs'][] = $this->title;
         foreach($myPrices as $i=>$price){
             echo $price->name;
             echo $form->field($model, "description[$i]")->widget(\kartik\touchspin\TouchSpin::class,['options' => ['placeholder' => 'Adjust ...'],]);
+            echo $form->field($model,'product_id')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['title']])->label(false);;
+            echo $form->field($model,'booking_date')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['start_date']])->label(false);;
+            echo $form->field($model,'time_name')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['times']])->label(false);;
 
 
         }
-
+        echo 'Total Price:<div id="total_price"></div>';
 
          ActiveForm::end();
     }
@@ -135,6 +138,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             });
         });
+        function myFunction(item, index) {
+
+
+            $('#product-times').html($('#product-times').html()+'<option>'+item['name']+'</option>');
+
+        }
+
+        var Total=0;
+        $('#product-form').change(function(){
+            $.ajax({
+                url: '<?php echo Yii::$app->request->baseUrl. '/Reservations/reservations/gettimes' ?>',
+                type: 'post',
+                data: {
+                    id:$('#productprice-product_id').val(),
+
+                },
+                success: function (data) {
+                    console.log(data.search);
+                    mytimes=data.search
+                    $('#total_price').html(Total);
+
+
+
+                }
+            });
+        });
+
+
 
     </script>
 
