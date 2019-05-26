@@ -31,7 +31,7 @@ $bundle = BackendAsset::register($this);
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top" role="navigation">
 			<!-- Sidebar toggle button-->
-			<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+			<a href="#" class="sidebar-toggle" data-toggle="push-menu"
 				role="button"> <span class="sr-only"><?php echo Yii::t('backend', 'Toggle navigation') ?></span>
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 				class="icon-bar"></span>
@@ -133,7 +133,8 @@ if(!$imaStreetSeller)
 echo Menu::widget(
                     [
                         'options' => [
-                            'class' => 'sidebar-menu'
+                            'class' => 'sidebar-menu',
+                            'data-widget' => 'tree'
                         ],
                         'linkTemplate' => '<a href="{url}">{icon}<span>{label}</span>{right-icon}{badge}</a>',
                         'submenuTemplate' => "\n<ul class=\"treeview-menu\">\n{items}\n</ul>\n",

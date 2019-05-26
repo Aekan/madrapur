@@ -72,12 +72,12 @@ $this->params['breadcrumbs'][] = $this->title;
         foreach($myPrices as $i=>$price){
             echo $price->name;
             $currentProdId=(Yii::$app->request->post('Product'))['title'];
-            echo $form->field($model, "description[$i]")->widget(\kartik\touchspin\TouchSpin::class,['options' => ['placeholder' => 'Adjust ...','data-priceid'=>$price->id]]);
+            echo $form->field($model, "description[$i]")->widget(\kartik\touchspin\TouchSpin::class,['options' => ['placeholder' => 'Adjust ...','data-priceid'=>$price->id,'autocomplete'=>'off','type'=>'number']]);
 
 
         }
         echo $form->field($model,'product_id')->hiddeninput(['value' => $currentProdId])->label(false);
-        echo $form->field($model,'booking_date')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['start_date']])->label(false);
+        echo $form->field($model,'booking_date')->hiddeninput(['autocomplete' => 'off', 'autocapitalize' => 'off', 'autocorrect' => 'off', 'value' => (Yii::$app->request->post('Product'))['start_date']])->label(false);
         echo $form->field($model,'time_name')->hiddeninput(['value' => (Yii::$app->request->post('Product'))['times']])->label(false);
 
         echo $form->field($model,'discount')->hiddeninput()->label(false);
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-
+//
 
     ?>
 
@@ -205,8 +205,25 @@ $this->params['breadcrumbs'][] = $this->title;
             });
         });
 
+        $().ready(() => {
+            $('#product-start_date').attr('autocomplete', 'off');
+        });
 
 
     </script>
 
+    <style>
+        #product-form {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+        }
+    </style>
+
 </div>
+
+<div id="app-container"></div>
