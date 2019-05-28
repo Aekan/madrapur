@@ -22,6 +22,8 @@ class Controller extends \yii\web\Controller {
             // '*',                        // star allows all domains
             'localhost',
             'http://localhost',
+            'http://localhost:8080',
+            'http://localhost:80',
             'https://localhost',
             'localhost:45678',
             'http://localhost:45678',

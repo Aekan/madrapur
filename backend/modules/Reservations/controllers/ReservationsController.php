@@ -191,11 +191,13 @@ class ReservationsController extends Controller {
         }
         if($productPrice){
 
+
             $newReservarion= new Reservations();
 
              $data=new \stdClass();
              $data->boookingDetails=new \stdClass();
              $data->orderDetails=new \stdClass();
+
              $data->personInfo=[];
              $data->updateDate=date('Y-m-d h:m:s');
 
@@ -241,25 +243,36 @@ class ReservationsController extends Controller {
 
 
 
+
+
            # $data=['boookingDetails'=> $booking->bookingDetails,'orderDetails'=>$booking->orderDetails,'personInfo'=>$booking->personInfo,'updateDate'=>date("Y-m-d H:i:s")];
 
             $data=json_encode($data);
 
+            $imaStreetSeller=Yii::$app->authManager-> getAssignment('streetSeller',Yii::$app->user->getId()) ;
 
+            $source='unset';
+            $imaStreetSeller=Yii::$app->authManager-> getAssignment('streetSeller',Yii::$app->user->getId()) ;
+            $imaHotelSeller=Yii::$app->authManager-> getAssignment('hotelSeller',Yii::$app->user->getId()) ;
+
+            if($imaStreetSeller){$source='Street';}
+            if($imaHotelSeller){$source='Hotel';}
 
 
             $values=[
                 'invoiceDate'=>date('Y-m-d'),
                 'bookingDate'=>$productPrice['booking_date'],
-                'source'=>'Utca',
+                'source'=>$source,
                 'productId'=>$productPrice['product_id'],
-                'bookingId'=>'tmpMad5',
+                'bookingId'=>'tmpMad1',
                 'data'=>$data,
+                'sellerId'=>Yii::$app->user->getId(),
+                'sellerName'=>Yii::$app->user->identity->username,
             ];
                 $insertReservation=Reservations::insertOne($newReservarion, $values);
 
                 if ($insertReservation) {
-                    $findBooking=Reservations::aSelect(Reservations::class,'*',Reservations::tableName(),'bookingId="tmpMad5"');
+                    $findBooking=Reservations::aSelect(Reservations::class,'*',Reservations::tableName(),'bookingId="tmpMad1"');
                     $booking=$findBooking->one();
                     $values=['bookingId'=>$booking->id];
                     Reservations::insertOne($booking,$values);
@@ -377,4 +390,35 @@ class ReservationsController extends Controller {
 
 
     }
+    public function actionMyreservations(){
+
+
+        $searchModel=new ReservationsAdminSearchModel();
+        $dataProvider = $searchModel->searchMyreservations(Yii::$app->request->queryParams);
+        $dataProvider->setSort([
+
+            'defaultOrder' => [
+                'id' => SORT_DESC
+            ]
+        ]);
+
+
+
+
+
+
+
+        return $this->render('myreservations',['dataProvider'=>$dataProvider,'searchModel'=>$searchModel]);
+    }
+
+    public function actionAllreservations(){
+            $searchModel=new ReservationsAdminSearchModel();
+            $dataProvider = $searchModel->searchMyreservations(Yii::$app->request->queryParams);
+
+
+
+
+            return $this->render('myreservations',['dataProvider'=>$dataProvider,'searchModel'=>$searchModel]);
+        }
+
 }

@@ -57,6 +57,39 @@ class ReservationsAdminSearchModel extends Reservations
 }
 
 
+    public function searchMyreservations($params)
+    {
+
+        $what = ['*'];
+        $from = self::tableName();
+        $currentUserId=\Yii::$app->user->getId();
+
+        $where = self::andWhereFilter([
+            # ['invoiceDate', '>=', $invoiceDate],
+            # ['bookingDate', '<=', $bookingDate],
+             ['source', '=', 'Street'],
+            ['sellerId', '=',strval($currentUserId) ],
+        ]);
+
+        $rows = self::aSelect(ReservationsAdminSearchModel::class, $what, $from, $where);
+
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $rows,
+            'pagination' => [
+                'pageSize' => 15,
+            ],
+        ]);
+
+        $this->load($params);
+
+        return $dataProvider;
+    }
+
+
+
+
 
 
     public function searchDay($params,$selectedDate,$sources,$prodId)

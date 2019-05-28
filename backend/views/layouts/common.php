@@ -391,17 +391,18 @@ echo Menu::widget(
                                         ],
                                         'icon' => '<i class="fa fa-database"></i>',
                                         'active' => (Yii::$app->controller->id == 'create'),
-                                    ],],
+                                    ],
+                                    [
+                                        'label' => Yii::t('backend', 'myReservations'),
+                                        'url' => [
+                                            '/Reservations/reservations/myreservations'
+                                        ],
+                                        'icon' => '<i class="fa fa-calendar"></i>',
+                                        'active' => (Yii::$app->controller->id == 'myreservations'),
+                                    ],
+                                    ],
                             ],
-                            [
-                                'label' => Yii::t('backend', 'ModulusReg'),
-                                'url' => [
-                                    '/Modulusreg/modulusreg/admin'
-                                ],
-                                'icon' => '<i class="fa fa-key"></i>',
-                                'active' => (Yii::$app->controller->id == 'Modulusreg'),
 
-                            ],
                             [
                                 'label' => Yii::t('backend', 'Key-Value Storage'),
                                 'url' => [
@@ -467,6 +468,14 @@ echo Menu::widget(
                                 ],
                                 'icon' => '<i class="fa fa-database"></i>',
                                 'active' => (Yii::$app->controller->id == 'create'),
+                            ],
+                            [
+                                'label' => Yii::t('backend', 'myReservations'),
+                                'url' => [
+                                    '/Reservations/reservations/myreservations'
+                                ],
+                                'icon' => '<i class="fa fa-calendar"></i>',
+                                'active' => (Yii::$app->controller->id == 'myreservations'),
                             ],
 
                         ],
