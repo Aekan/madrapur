@@ -14,16 +14,3 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+/web)/.*$ $1/index.php
 
-<IfModule mod_headers.c>
-    RequestHeader set X-Prerender-Token "szSbr1x1xEXhAF8Nwjtv"
-</IfModule>
-
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-
-    RewriteCond %{HTTP_USER_AGENT} googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator [NC,OR]
-    RewriteCond %{QUERY_STRING} _escaped_fragment_
-
-    # Only proxy the request to Prerender if it's a request for HTML
-    RewriteRule ^(?!.*?(\.js|\.css|\.xml|\.less|\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.txt|\.ico|\.rss|\.zip|\.mp3|\.rar|\.exe|\.wmv|\.doc|\.avi|\.ppt|\.mpg|\.mpeg|\.tif|\.wav|\.mov|\.psd|\.ai|\.xls|\.mp4|\.m4a|\.swf|\.dat|\.dmg|\.iso|\.flv|\.m4v|\.torrent|\.ttf|\.woff|\.svg))(.*) https://service.prerender.io/https://budapestrivercruise.co.uk/$2 [P,L]
-</IfModule>
