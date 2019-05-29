@@ -1,3 +1,4 @@
+
  <IfModule mod_deflate.c>
  AddOutputFilterByType DEFLATE text/plain
  AddOutputFilterByType DEFLATE text/html
@@ -23,6 +24,11 @@
  ExpiresByType text/javascript "access plus 1 months"
  </IfModule>
 
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://budapestrivercruise.co.uk/$1 [R,L]
+
+
  RequestHeader set X-Prerender-Token "szSbr1x1xEXhAF8Nwjtv"
 
            <IfModule mod_rewrite.c>
@@ -30,12 +36,11 @@
                <IfModule mod_proxy_http.c>
                    RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator) [NC,OR]
                    RewriteCond %{QUERY_STRING} _escaped_fragment_
-
+                   DirectoryIndex index.php
                    # Only proxy the request to Prerender if it's a request for HTML
                    RewriteRule ^(?!.*?(\.js|\.css|\.xml|\.less|\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.txt|\.ico|\.rss|\.zip|\.mp3|\.rar|\.exe|\.wmv|\.doc|\.avi|\.ppt|\.mpg|\.mpeg|\.tif|\.wav|\.mov|\.psd|\.ai|\.xls|\.mp4|\.m4a|\.swf|\.dat|\.dmg|\.iso|\.flv|\.m4v|\.torrent|\.ttf|\.woff|\.svg))(.*) http://service.prerender.io/https://budapestrivercruise.co.uk/$2 [P,L]
                 </IfModule>
            </IfModule>
-
 
 
 RewriteEngine On
@@ -43,5 +48,3 @@ RewriteCond %{HTTP_USER_AGENT} !(googlebot|bingbot|yandex|baiduspider|facebookex
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
-
-
