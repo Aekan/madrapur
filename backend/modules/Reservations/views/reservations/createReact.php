@@ -9,9 +9,107 @@
     .key { color: red; }
     .ticket{font-size: 15px; color: #367fa9;}
     .time{font-size: 15px; color: #367fa9;}
-    label{font-size: 18px; color: #367fa9;}
-    form{
-        margin:20px 0px;
+    .title{font-size: 25px; color: #367fa9;text-align:center;margin:50px 0px 30px 0px;font-family: georgia;}
+    label{font-size: 18px; color: #367fa9;text-align:center}
+    form{ margin:20px 0px;}
+
+    .inputGroup {
+    background-color: #fff;
+    display: block;
+    margin: 10px 0;
+    position: relative;}
+
+    .ticket{
+        padding:30px 10px;
+        border:solid 2px #f5f5f5;
+        font-size:20px;
+        font-family: gergia;
+        text-align: center;
+    }
+
+    .ticket:nth-child(even){background-color: #f5f5f5;}
+
+    .currencyLabel {
+      padding: 12px 30px;
+      width: 20%;
+      display: block;
+      border-radius: 30px;
+      box-shadow: 0px 0px 15px 2px #e8e8e8;
+      text-align: left;
+      color: #3C454C;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      transition: color 200ms ease-in;
+      overflow: hidden;}
+
+    .currencyInput:checked ~ label {
+      color: #fff;
+      background-color: #2de692;
+      border-color: #2de692; 
+    }
+
+    .currencyInput {
+      width: 32px;
+      height: 32px;
+      order: 1;
+      z-index: 2;
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      visibility: hidden;
+    }
+
+    
+
+    .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    outline: none;
+    }
+    .switch input {
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    }
+    .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+    }
+    .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+    }
+    input:checked + .slider {
+    background-color: #2de692;
+    }
+    input:focus + .slider {
+    box-shadow: 0 0 1px #2de692;
+    }
+    input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
     }
 
     #rDebug{display:none;}
@@ -36,6 +134,7 @@
     input[type="number"]{
         padding: 13px 20px;
         font-size:17px;
+        text-align: center;
         border-radius: 20px;
         width: 100%;
         border: none;
@@ -46,9 +145,12 @@
     input[type="submit"]{
         background-color: #fff;
         color: #367fa9;
-        padding: 8px 45px;
+        margin: 40px 0px 0px 0px;
+        padding: 15px 45px;
         font-size: 18px;
+        width:100%;
         border: none;
+        border-radius: 20px;
         box-shadow: 0px 0px 15px 2px #e8e8e8;
     }
 
@@ -60,6 +162,11 @@
         form{
             text-align:center;
         }
+
+        
+
+        .currencyLabel{width:100%;}
+
         input[type="number"]{
             text-align:center;
             font-size:20px;
@@ -239,6 +346,9 @@
                 ido: 1,
                 totalPrice: 0,
                 Price: [],
+                paid: 'unpaid',
+                display:'none',
+                isChecked: false,
                 createReservation:[
                     {idReservation: 0},
                     {priceReservation: 0},
@@ -248,8 +358,10 @@
             };
 
             this.handleChange = this.handleChange.bind(this);
+            this.handlePick = this.handlePick.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
             this.totalCounter = this.totalCounter.bind(this);
+            this.handleCurrency = this.handleCurrency.bind(this);
         }
 
 
@@ -280,30 +392,47 @@
         handleChange(event) {
             this.setState({ ido: event.currentTarget.value })
             event.preventDefault();
+            console.log(2)
         }
 
         handleSubmit(event) {
-            //alert('your pick: ' + this.state.ido);
             event.preventDefault();
         }
 
+          
+        handlePick = (ev) => {
+            this.setState({
+                isChecked: ev.target.checked
+            })
 
+            if(this.state.isChecked === false){
+                this.setState({
+                    display: "block"
+                })
+            }
+            else(
+                this.setState({
+                    display: "none"
+                })
+            )          
+        }
 
+        handleCurrency(event){
+            this.setState({
+                paid: event.currentTarget.value
+            })
 
+            console.log(this.state.paid)
+        }
+       
         totalCounter(e) {
             const { Price } = this.state;
             const { totalCounter } = this.state;
-
-            console.log(`onChange fired with value: '${e.currentTarget.value}'`);
-
             this.setState({ Price: e.currentTarget.value })
-
-            console.log(Price);
-
-            this.setState({ totalCounter: e.currentTarget.value })
-
-            console.log(totalCounter);
+            this.setState({ totalCounter: e.currentTarget.value })          
         }
+
+        
 
 
 
@@ -313,42 +442,14 @@
             const { data, ido, Price} = this.state;
             const dataText = this.syntaxHighlight(data);
 
-            //timesok létrehozása
-            const RenderTime = (props) => {
-                const { product } = props;
+
+            //program választó
+            const RenderProgram = (props) => {
                 return(
-                    data[product].times.map(function(time, idx) {
-                        return <option className="time" key={idx}>
-                            {time.name}
-                        </option>;})
-                )
-            }
-
-
-            //ticket típusok létrehozása
-            const RenderTicket = (props) => {
-                const { product } = props;
-                return(
-                    data[product].prices.map((ticket, idx) => {
-                        return <div className="ticket" key={idx}>
-                            {ticket.name}<br />
-                            <input type="number" id={ticket.id} placeholder="0"className="mod" value={Price[idx]} name={`price_${ticket.id}`} onChange={this.totalCounter} />
-                            <hr />
-                            <br />
-                        </div>;})
-                )
-            }
-
-
-            const RenderTitle = (props) => {
-                return(
-                    <form onSubmit={this.handleSubmit}>
-
-                        <div>
+                    <div>
                             <i className="fa fa-user-happy"></i>
-                            <label>
-                                Select program:
-                            </label>
+                            <div className="title">
+                                SELECT PROGRAM</div>
                             <div className="option-group">
                                 <div className="option-container" >
                                     <input value="1" onChange={this.handleChange} checked={this.state.ido === '1'}  className="option-input" id="option-1" type="radio" name="options" />
@@ -386,26 +487,98 @@
                                 </div>
                             </div>
                             <br />
-                            <hr />
                         </div>
+                )
+            }
+
+            //timesok létrehozása
+            const RenderTime = (props) => {
+                const { product } = props;
+                return(
+                    data[product].times.map(function(time, idx) {
+                        return <option className="time" key={idx}>
+                            {time.name}
+                        </option>;})
+                )
+            }
+
+
+            //ticket típusok létrehozása
+            const RenderTicket = (props) => {
+                const { product } = props;
+                return(
+                    data[product].prices.map((ticket, idx) => {
+                        return <div className="ticket" key={idx}>
+                            {ticket.name}<br />
+                            <input type="number" id={ticket.id} placeholder="0"className="mod" value={Price[idx]} name={`price_${ticket.id}`} onChange={this.totalCounter} />
+                            
+                            <br />
+                        </div>;})
+                )
+            }
+
+            //kapcsoló renderelés
+            const RenderToggle = (props)=>{
+                return (
+                    <div>
+                        <div className="title">PAID OR NOT</div>
+                        <label className="switch">
+                            <input type="checkbox" checked={this.state.isChecked} onChange={this.handlePick} />
+                            <div className="slider"></div>
+                        </label>
+                    </div>
+                );
+            }
+
+            //currency renderelés
+            const RenderCurrency = ()=>{
+                return (
+                    <div style={{display:this.state.display, margin: '20px 0px'}}>
+                    <hr />              
+                        <div className="inputGroup">
+                            <input className="currencyInput" onChange={this.handleCurrency} id="option1" value="EURO" name="option" type="radio"/>
+                            <label className="currencyLabel" htmlFor="option1">€ - EURO</label>
+                        </div>
+                        
+                        <div className="inputGroup">
+                            <input className="currencyInput" onChange={this.handleCurrency} id="option2" value="FORINT" name="option" type="radio"/>
+                            <label className="currencyLabel" htmlFor="option2">Ft - FORINT</label>
+                        </div>
+                    </div>  
+                );
+            }
+
+
+
+
+
+
+            const RenderTitle = (props) => {
+                return(
+                    <form onSubmit={this.handleSubmit}>
+
+                        <RenderProgram />
                         <br />
                         <div>
-                            <label>
-                                Select time:
-                            </label>
+                        <div className="title">SELECT TIME</div>
                             <br />
                             <select className="select-css" >
                                 <RenderTime product={ido} />
                             </select>
-                            <hr />
-                            <br />
-                            <div>
-                                <RenderTicket product={ido} />
-                            </div>
                         </div>
+                        <div className="title">SELECT TICKET</div>
                         <div>
-                            <input className="pulse" type="submit" value="Submit »" />
+                            <RenderTicket product={ido} />
                         </div>
+                        <div>                          
+                            <RenderToggle />
+                        </div>   
+                        <div>
+                            <RenderCurrency />
+                        </div>            
+                        
+                        <input className="pulse" type="submit" value="Submit »" />
+                        
                     </form>
                 )
             }
@@ -427,17 +600,6 @@
         <ReservationsCreate />,
         document.getElementById('root')
     );
-
-
-
-    /*<select className="select-css"  onChange={this.handleChange}>
-        {data.map(function(data, idx) {
-        return <option value={data.id} key={idx}>
-            {data.title}
-        </option>;
-        })
-        }
-    </select>*/
 </script>
 
 
