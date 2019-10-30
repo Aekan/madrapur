@@ -116,8 +116,9 @@ use kartik\helpers\Html;
                                         'name' => 'paid_status', // input name. Either 'name', or 'model' and 'attribute'
                                         // properties must be specified.
 
-                                        'checked' => false,
+                                        'checked' => true,
                                         'id'=>'paid_status',
+
                                         'options' => [
                                             'data-on'=>'Paid',
                                             'data-off'=>'Unpaid',
@@ -134,7 +135,7 @@ use kartik\helpers\Html;
                                 <?=   Toggle::widget(
                                     [
                                         'name' => 'paid_currency', // input name. Either 'name', or 'model' and 'attribute' properties must be specified.
-                                        'checked' => true,
+                                        'checked' => false,
                                         'options' => [
                                             'data-on'=>'EUR',
                                             'data-off'=>'HUF',

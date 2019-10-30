@@ -13,4 +13,3 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Termékek'), 'url' =
     ?>
 
 </div>
-

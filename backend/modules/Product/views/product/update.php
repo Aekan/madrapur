@@ -11,7 +11,6 @@ use kartik\helpers\Html;
 
 //$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Termékek'), 'url' => ['admin']];
 //$this->params['breadcrumbs'][] = Yii::t('app', 'Szerkesztés');
-
 ?>
 
 
@@ -21,13 +20,35 @@ use kartik\helpers\Html;
         <div class="card card-primary card-outline">
             <div class="card-header">
                 <h3 class="card-title">
-                    <i class="fas fa-pencil-alt fa-fw "></i>
+                    <i class="fas fa-pencil-alt fa-fw fa-lg "></i>
 
                     <?= '<u>' . $model->title . '</u>'?>
                 </h3>
+                <?php
+                    $referrer = Yii::$app->request->referrer;
 
+                    $form = ActiveForm::begin([
+                                                  'id' => 'product-edit',
+                                                  'action' => 'update?prodId=' . $prodId,
+                                                  'options' => ['class' => 'product-edit', 'enctype' => 'multipart/form-data'],
+
+                                              ]);
+
+
+
+                ?>
                 <div class="card-tools">
 
+
+
+
+                    <?php
+
+                        echo \yii\helpers\Html::a( 'Back', $referrer, [
+                            'class' => "btn btn-primary float-right  " . ($referrer ? "" : " disabled"),
+                        ]).' '.Html::submitButton('Update Product', ['class' => ' btn btn-primary prodUpdateBtn float-right']);
+
+                    ?>
                 </div>
             </div>
             <div class="card-body">
@@ -35,20 +56,8 @@ use kartik\helpers\Html;
 
                     <?php
 
-                    $referrer = Yii::$app->request->referrer;
 
-                    $form = ActiveForm::begin([
-                        'id' => 'product-edit',
-                        'action' => 'update?prodId=' . $prodId,
-                        'options' => ['class' => 'product-edit', 'enctype' => 'multipart/form-data'],
 
-                    ]);
-
-                    echo \yii\helpers\Html::a( 'Back', $referrer, [
-                        'class' => "btn btn-primary" . ($referrer ? "" : " disabled"),
-                    ]);
-
-                    echo Html::submitButton('Termék Frissítése', ['class' => 'btn btn-primary prodUpdateBtn']);
 
                     switch ($updateResponse) {
                         case 1:

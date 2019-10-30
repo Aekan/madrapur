@@ -450,8 +450,8 @@
         }
     </style>
 
-    <a href="<?= \yii\helpers\Url::to("/Reservations/reservations/create2") ?>" class="btn btn-floating-right-bottom btn-app
-    bg-purple"><i class="fa fa-plus-square"></i></a>
+    <a href="<?= \yii\helpers\Url::to("/Reservations/reservations/create2") ?>" class="btn btn-floating-right-bottom
+    bg-purple"><i class="fa fa-2x fa-plus-square"></i></a>
 <?php
 
 ?>
