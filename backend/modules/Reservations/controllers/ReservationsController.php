@@ -988,6 +988,13 @@
             if (!Yii::$app->user->can(Reservations::CREATE_BOOKING)) {
                 throw new ForbiddenHttpException('userCan\'t');
             }
+            $ticketBlock = TicketBlockSearchModel::aSelect(TicketBlockSearchModel::class, '*', TicketBlockSearchModel::tableName(), 'assignedTo = ' . Yii::$app->user->id . ' AND isActive IS TRUE')->one();
+            if(!$ticketBlock){
+                sessionSetFlashAlert('danger','Oops, you\'ll need a Ticket Block first ');
+                return $this->redirect('/Dashboard/dashboard/admin');
+            }
+
+
 
             $block = TicketBlockSearchModel::find()
                 ->andFilterWhere(['=', 'assignedTo', Yii::$app->user->id])
@@ -1176,7 +1183,7 @@
 
                     ///Let's create a log that it was sold for somebody else
 
-                    $updateResponse = sessionSetFlashAlert('success', '<i class="fas fa-check-square fa-lg   "></i> ' . 'Successful Reservation');;
+                    $updateResponse = sessionSetFlashAlert('success', '<i class="fas fa-check-square fa-lg   "></i> ' . 'Successful Reservation');
 
 
                     Yii::$app->commandBus->handle(
