@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04febfdc318592e0bccec8bf9507e1a4",
+    "content-hash": "4850a8917255999ae8444972bcb955d7",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -2838,16 +2838,16 @@
         },
         {
             "name": "kartik-v/yii2-dynagrid",
-            "version": "v1.5.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-dynagrid.git",
-                "reference": "16b9f2bb145a4e2eee2f36d7b3fa2d75907797c3"
+                "reference": "5e531da458dd894596acab892749213dead20319"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-dynagrid/zipball/16b9f2bb145a4e2eee2f36d7b3fa2d75907797c3",
-                "reference": "16b9f2bb145a4e2eee2f36d7b3fa2d75907797c3",
+                "url": "https://api.github.com/repos/kartik-v/yii2-dynagrid/zipball/5e531da458dd894596acab892749213dead20319",
+                "reference": "5e531da458dd894596acab892749213dead20319",
                 "shasum": ""
             },
             "require": {
@@ -2894,7 +2894,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2019-02-23T19:25:47+00:00"
+            "time": "2019-05-25T07:10:50+00:00"
         },
         {
             "name": "kartik-v/yii2-editable",
@@ -12601,6 +12601,7 @@
         "schmunk42/yii2-giiant": 0,
         "kartik-v/yii2-widget-activeform": 20,
         "warrence/yii2-kartikgii": 20,
+        "kartik-v/yii2-dynagrid": 20,
         "yiisoft/yii2-gii": 20
     },
     "prefer-stable": true,

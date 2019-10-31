@@ -886,7 +886,16 @@ $bundle = BackendAsset::register($this);
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
+        <nav class="mt-2">
+            <?=\common\widgets\MadMenu::widget($sidemenu);?>
+            <?php
+
+
+            ?>
+
+
+
+        </nav>
     </aside>
     <!-- /.control-sidebar -->
 
