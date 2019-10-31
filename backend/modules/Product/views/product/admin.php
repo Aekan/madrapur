@@ -10,10 +10,7 @@ use kartik\icons\Icon;
 
 ?>
 
-<div class="product-default-index">
 
-
-</div>
 
 <div class="row">
     <div class="col-12">
@@ -91,16 +88,6 @@ use kartik\icons\Icon;
 
                     ];
 
-                    echo GridView::widget([
-
-                                              'dataProvider' => $dataProvider ,
-                                              'columns' => $gridColumns ,
-                                              'layout' => '{items}{pager}'
-                                          ]);
-                    // $prodInfo=Product::getProdById(43); //With this method you get every information about a product with $id
-
-                    //        $response = $client->yell($selectedDate,$currentProduct);
-                    //        echo $response;
                     //
                     $dynagrid = DynaGrid::begin([
                                                     'columns' => $gridColumns,
@@ -111,11 +98,11 @@ use kartik\icons\Icon;
                                                         'dataProvider'=>$dataProvider,
                                                         'filterModel'=>$searchModel,
                                                         'showPageSummary'=>true,
-                                                        'floatHeader'=>true,
+                                                        'floatHeader'=>false,
                                                         'pjax'=>true,
                                                         'responsiveWrap'=>false,
                                                         'panel'=>[
-                                                            'heading'=>'<h3 class="panel-title"><i class="fas fa-book"></i>  Library</h3>',
+                                                            'heading'=>'<h5 class="panel-title"><i class="fas fa-book"></i>  Products</h5>',
                                                             'before' =>  '<div style="padding-top: 7px;"><em>* The table header sticks to the top in this demo as you scroll</em></div>',
                                                             'after' => false
                                                         ],

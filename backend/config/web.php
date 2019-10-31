@@ -24,6 +24,11 @@ $config = [
         ],
     ],
     'modules' => [
+        'dynagrid'=> [
+            'class'=>'\kartik\dynagrid\Module',
+            // other module settings
+        ],
+
         'Issuerequest' => [
             'class' => backend\modules\Issuerequest\Module::class,
         ],

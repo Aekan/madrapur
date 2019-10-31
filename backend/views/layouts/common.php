@@ -31,7 +31,7 @@ $bundle = BackendAsset::register($this);
             'role'=>'menu',
             'data-accordion'=>false
         ],
-        'linkTemplate' => '<a class="nav-link {active}" href="{url}">{icon}<p>{label}</p>{badge}{right-icon}</a>',
+        'linkTemplate' => '<a class="nav-link text-white {active}" href="{url}">{icon}<p>{label}</p>{badge}{right-icon}</a>',
         'submenuTemplate' => "\n<ul class=\"nav nav-treeview bg-secondary \" >\n{items}\n</ul>\n",
         'activateParents' => true,
         'itemOptions'=>['class'=>'nav-item'],
@@ -886,13 +886,24 @@ $bundle = BackendAsset::register($this);
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="<?php echo Yii::$app->user->identity->userProfile->getAvatar($this->assetManager->getAssetUrl($bundle, 'img/anonymous.jpg')) ?>" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">   <?php echo Yii::$app->user->identity->username ?></a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
         <nav class="mt-2">
+            <div class="sidebar">
             <?=\common\widgets\MadMenu::widget($sidemenu);?>
             <?php
 
 
             ?>
-
+            </div>
 
 
         </nav>
