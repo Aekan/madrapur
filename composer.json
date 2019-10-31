@@ -98,11 +98,8 @@
 		"kartik-v/yii2-field-range": "*",
 		"warrence/yii2-kartikgii": "dev-master",
 		"kartik-v/yii2-widget-timepicker": "*",
-		"daxslab/yii2-thumbnailer": "*",
-		"yiisoft/yii2-imagine": "*"
-
-
-
+		"diecoding/yii2-toastr": "*",
+		"lavrentiev/yii2-toastr": "^2.0"
 
 	},
 	"minimum-stability": "dev",

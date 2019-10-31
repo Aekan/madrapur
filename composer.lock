@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9550806f08b8c18112ed4fdef6ea89ad",
+    "content-hash": "527ff9d653287d9a2541110d3540a300",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -233,7 +233,7 @@
             "version": "v1.4.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ajaxorg/ace-builds.git",
+                "url": "git@github.com:ajaxorg/ace-builds.git",
                 "reference": "5ad04a46e8e0981a65dd982693e5d19a2209311c"
             },
             "dist": {
@@ -251,7 +251,7 @@
             "version": "v3.16.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/blueimp/JavaScript-Canvas-to-Blob.git",
+                "url": "git@github.com:blueimp/JavaScript-Canvas-to-Blob.git",
                 "reference": "eab2845ebb03c9667ea6ade002ceadbef071c060"
             },
             "dist": {
@@ -320,7 +320,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
+                "url": "git@github.com:twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -341,12 +341,12 @@
             "version": "v1.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/uxsolutions/bootstrap-datepicker.git",
+                "url": "git@github.com:eternicode/bootstrap-datepicker.git",
                 "reference": "d364be5b066b38f3675a5a1dc174ce1ab1f3360e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uxsolutions/bootstrap-datepicker/zipball/d364be5b066b38f3675a5a1dc174ce1ab1f3360e",
+                "url": "https://api.github.com/repos/eternicode/bootstrap-datepicker/zipball/d364be5b066b38f3675a5a1dc174ce1ab1f3360e",
                 "reference": "d364be5b066b38f3675a5a1dc174ce1ab1f3360e"
             },
             "require": {
@@ -490,7 +490,7 @@
             "version": "3.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "15bc73803f76bc53b654b9fdbbbc096f56d7c03d"
             },
             "dist": {
@@ -529,7 +529,7 @@
             "version": "v2.1.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/js-cookie/js-cookie.git",
+                "url": "git@github.com:js-cookie/js-cookie.git",
                 "reference": "8b70250875f7e07445b6a457f9c2474ead4cba44"
             },
             "dist": {
@@ -565,13 +565,31 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
+                "url": "git@github.com:bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/toastr",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:johnpapa/toastr-bower.git",
+                "reference": "e648a870a60103bbc3986c1fe2b2de86ea4a9569"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johnpapa/toastr-bower/zipball/e648a870a60103bbc3986c1fe2b2de86ea4a9569",
+                "reference": "e648a870a60103bbc3986c1fe2b2de86ea4a9569"
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6.3"
             },
             "type": "bower-asset"
         },
@@ -986,6 +1004,60 @@
                 "yii2"
             ],
             "time": "2017-01-17T22:47:25+00:00"
+        },
+        {
+            "name": "diecoding/yii2-toastr",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/die-coding/yii2-toastr.git",
+                "reference": "ab44be9c8b11502094dc98f410c5201b6262231c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/die-coding/yii2-toastr/zipball/ab44be9c8b11502094dc98f410c5201b6262231c",
+                "reference": "ab44be9c8b11502094dc98f410c5201b6262231c",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/toastr": "^2.1",
+                "php": ">=7.0",
+                "yiisoft/yii2": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "<7"
+            },
+            "type": "yii2-widget",
+            "autoload": {
+                "psr-4": {
+                    "diecoding\\toastr\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Die Coding",
+                    "email": "diecoding@gmail.com"
+                },
+                {
+                    "name": "Sugeng Sulistiyawan",
+                    "email": "sugeng.sulistiyawan@gmail.com"
+                }
+            ],
+            "description": "Simple flash toastr notifications for Yii2",
+            "keywords": [
+                "flash",
+                "jquery",
+                "notification",
+                "session",
+                "toastr",
+                "widget",
+                "yii2"
+            ],
+            "time": "2019-08-12T15:36:35+00:00"
         },
         {
             "name": "dmstr/yii2-bootstrap",
@@ -4577,6 +4649,52 @@
                 "yii2"
             ],
             "time": "2019-08-25T20:12:24+00:00"
+        },
+        {
+            "name": "lavrentiev/yii2-toastr",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lavrentiev/yii2-toastr.git",
+                "reference": "a5392f09c64285fc15d5be17bb23ae959b3b382d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lavrentiev/yii2-toastr/zipball/a5392f09c64285fc15d5be17bb23ae959b3b382d",
+                "reference": "a5392f09c64285fc15d5be17bb23ae959b3b382d",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/toastr": "^2.1",
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "lavrentiev\\widgets\\toastr\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Eugene Lavrentiev (RyanTedder)",
+                    "email": "lavrentiev.e@gmail.com",
+                    "homepage": "https://github.com/lavrentiev"
+                }
+            ],
+            "description": "Simple javascript toast notifications",
+            "homepage": "https://github.com/lavrentiev/yii2-toastr",
+            "keywords": [
+                "extension",
+                "jquery",
+                "notification",
+                "toastr",
+                "yii2"
+            ],
+            "time": "2017-10-24T08:49:46+00:00"
         },
         {
             "name": "league/flysystem",
@@ -10315,6 +10433,50 @@
     ],
     "packages-dev": [
         {
+            "name": "abushamleh/yii2-toast",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Abdelhadi92/yii2-toast.git",
+                "reference": "71401cc5557c19a6583402dfd11a87d556c0d47e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Abdelhadi92/yii2-toast/zipball/71401cc5557c19a6583402dfd11a87d556c0d47e",
+                "reference": "71401cc5557c19a6583402dfd11a87d556c0d47e",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "abushamleh\\toast\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abdelhadi Abu-Shamleh",
+                    "email": "abushamleh92@gmail.com"
+                }
+            ],
+            "description": "Yii2 toast alert",
+            "keywords": [
+                "Abdelhadi Abu-Shamleh",
+                "Pjax alert",
+                "ajax alert",
+                "toast alert",
+                "yii2",
+                "yii2-toast"
+            ],
+            "time": "2018-11-04T22:41:25+00:00"
+        },
+        {
             "name": "almasaeed2010/adminlte",
             "version": "v3.0.0-rc.5",
             "source": {
@@ -10352,6 +10514,53 @@
                 "web"
             ],
             "time": "2019-10-19T09:38:03+00:00"
+        },
+        {
+            "name": "aryelds/yii2-sweet-alert",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aryelds/yii2-sweet-alert.git",
+                "reference": "233db6d669ac8929db38a828231d5b19c22f09a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aryelds/yii2-sweet-alert/zipball/233db6d669ac8929db38a828231d5b19c22f09a1",
+                "reference": "233db6d669ac8929db38a828231d5b19c22f09a1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/sweetalert": "1.1.3",
+                "php": ">=5.5",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "aryelds\\sweetalert\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aryel Santos",
+                    "email": "aryel.ds@gmail.com"
+                }
+            ],
+            "description": "A widget to flash sweet alert messages using SweetAlert plugin",
+            "keywords": [
+                "alert",
+                "extension",
+                "widget",
+                "yii2",
+                "yii2 sweet alert",
+                "yii2-sweet-alert"
+            ],
+            "time": "2018-05-12T14:38:50+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -10411,6 +10620,24 @@
                 "parser"
             ],
             "time": "2019-01-16T14:22:17+00:00"
+        },
+        {
+            "name": "bower-asset/sweetalert",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:t4t5/sweetalert.git",
+                "reference": "3b9d8eb90268e0b1f8f58b2eba240631df0ad18f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/t4t5/sweetalert/zipball/3b9d8eb90268e0b1f8f58b2eba240631df0ad18f",
+                "reference": "3b9d8eb90268e0b1f8f58b2eba240631df0ad18f"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "codeception/codeception",

@@ -103,6 +103,11 @@ class LoginForm extends Model {
     public function login() {
 
         $duration = $this->rememberMe ? Time::SECONDS_IN_A_MONTH : 0;
+        if($this->getUser()===null){
+
+            return false;
+
+        }
         if (Yii::$app->user->login($this->getUser(), $duration)) {
             if (! Yii::$app->user->can('loginToBackend')) {
                 Yii::$app->user->logout();

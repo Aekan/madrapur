@@ -1,16 +1,18 @@
 <?php
-use yii\helpers\Html;
+
+    use lavrentiev\widgets\toastr\Notification;
+    use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 \backend\assets\MaterializeAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \backend\models\LoginForm */
 
-$this->title = Yii::t('backend', 'Sign In');
-$this->params['breadcrumbs'][] = $this->title;
+
 $this->params['body-class'] = 'login-page';
 
 ?>
+
 <div class="login-box">
 	<div class="login-logo">
         <?php echo Html::encode($this->title) ?>
@@ -18,10 +20,22 @@ $this->params['body-class'] = 'login-page';
     <div class="row">
         <div class="col-12">
             <!-- interactive chart -->
-            <div class="card card-primary card-outline">
+            <div class="card card-info ">
                 <div class="card-header">
                     <h3 class="card-title">
+                    <?='Sign in'?>
+                    <?php
 
+                    if(isset($invalid)){
+                        echo Notification::widget([
+                                                      'type' => 'error',
+                                                      'message' => 'Invalid creditentials'
+                                                  ]);
+
+
+                    }
+
+                    ?>
                     </h3>
 
                     <div class="card-tools">
@@ -30,6 +44,7 @@ $this->params['body-class'] = 'login-page';
                     </div>
                 </div>
                 <div class="card-body">
+
                     <div class="login-box-body">
                         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                         <div class="body">
@@ -55,7 +70,10 @@ $this->params['body-class'] = 'login-page';
                                     ])?>
                         </div>
                         <?php ActiveForm::end() ?>
+
+
                     </div>
+
 
                 </div>
                 <!-- /.card-body-->
