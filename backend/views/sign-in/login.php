@@ -1,5 +1,6 @@
 <?php
 
+    use aryelds\sweetalert\SweetAlert;
     use lavrentiev\widgets\toastr\Notification;
     use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
@@ -27,12 +28,12 @@ $this->params['body-class'] = 'login-page';
                     <?php
 
                     if(isset($invalid)){
-                        echo Notification::widget([
-                                                      'type' => 'error',
-                                                      'message' => 'Invalid creditentials'
-                                                  ]);
+                        echo SweetAlert::widget([
+                                                    'options' => [
+                                                        'title' => "Invalid Creditentials",
 
-
+                                                    ]
+                                                ]);
                     }
 
                     ?>
