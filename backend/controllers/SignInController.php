@@ -70,9 +70,15 @@ class SignInController extends Controller {
 
             return $this->goBack();
         } else {
+            $invalid=false;
+
+            if(Yii::$app->request->post('LoginForm')){
+                $invalid=true;
+
+            }
 
             return $this->render('login', [
-                'model' => $model,'invalid'=>true
+                'model' => $model,'invalid'=>$invalid
             ]);
         }
     }

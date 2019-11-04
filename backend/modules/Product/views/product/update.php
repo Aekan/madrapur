@@ -1,16 +1,11 @@
 <?php
 
-/* @var $this yii\web\View */
+    /* @var $this yii\web\View */
 
-use kartik\form\ActiveForm;
-use kartik\helpers\Html;
+    /* @var $model backend\modules\Products\models\Products */
 
-/* @var $model backend\modules\Products\models\Products */
 
-//$this->title = Yii::t('app', 'Edit product');
 
-//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Termékek'), 'url' => ['admin']];
-//$this->params['breadcrumbs'][] = Yii::t('app', 'Szerkesztés');
 ?>
 
 
@@ -19,83 +14,101 @@ use kartik\helpers\Html;
         <!-- interactive chart -->
         <div class="card card-primary card-outline">
             <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fas fa-pencil-alt fa-fw fa-lg "></i>
 
-                    <?= '<u>' . $model->title . '</u>'?>
-                </h3>
-                <?php
-                    $referrer = Yii::$app->request->referrer;
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item">
+                        <a class="nav-link active"
+                           href="#content"
+                           data-toggle="tab"><?= Yii::t('app', 'Details') ?></a>
+                    </li>
+                    <!--    <li class="nav-item">-->
+                    <!--        <a class="nav-link"-->
+                    <!--           href="#meta"-->
+                    <!--           data-toggle="tab">--><? //= Yii::t('app', 'Meta') ?><!--</a>-->
+                    <!--    </li>-->
+                    <li lass="nav-item">
+                        <a class="nav-link"
+                           href="#prices"
+                           data-toggle="tab"><?= Yii::t('app', '$Prices') ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="#sources"
+                           data-toggle="tab"><?= Yii::t('app', 'Sources') ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="#times"
+                           data-toggle="tab"><?= Yii::t('app', 'Times') ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="#add-ons"
+                           data-toggle="tab"><?= Yii::t('app', 'Add-ons') ?></a>
+                    </li>
+                    <!--    <li class="nav-item">-->
+                    <!--        <a class="nav-link"-->
+                    <!--           href="#timetable"-->
+                    <!--           data-toggle="tab">--><? //= Yii::t('app', 'TimeTable') ?><!--</a>-->
+                    <!--    </li>-->
+                </ul>
 
-                    $form = ActiveForm::begin([
-                                                  'id' => 'product-edit',
-                                                  'action' => 'update?prodId=' . $prodId,
-                                                  'options' => ['class' => 'product-edit', 'enctype' => 'multipart/form-data'],
 
-                                              ]);
-
-
-
-                ?>
                 <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
 
-
-
-
-                    <?php
-
-                        echo \yii\helpers\Html::a( 'Back', $referrer, [
-                            'class' => "btn btn-primary float-right  " . ($referrer ? "" : " disabled"),
-                        ]).' '.Html::submitButton('Update Product', ['class' => ' btn btn-primary prodUpdateBtn float-right']);
-
-                    ?>
                 </div>
             </div>
             <div class="card-body">
                 <div class="products-update">
 
+
+                    <h1><?= $this->title ?></h1>
+
                     <?php
 
+                        switch ($updateResponse) {
+                            case 1:
+                                $updateResponse = sessionSetFlashAlert('success','Successful Product update');
+                                break;
+                            case 0:
 
-
-
-                    switch ($updateResponse) {
-                        case 1:
-                            $updateResponse = sessionSetFlashAlert('success','Product Update Successful');
-                            break;
-
-                    }
-
-
-
-
-                    echo $this->render('editForm', [
-                        'model' => $model,
-                        'backenddata' => $backendData,
-                        'prodId' => $prodId,
-                        'modelTimes' => $modelTimes,
-                        'modelPrices' => $modelPrices,
-                        'modelEvents' => $modelEvents,
-                        'modelSources' => $modelSources,
-                        'modelAddOns' => $modelAddOns,
-                        'selectedModelAddOns' => $selectedModelAddOns,
-                        'form' => $form,
-                    ]);
-
-
-                    ActiveForm::end();
-
+                        }
+                        echo $updateResponse;
                     ?>
 
+
+                    <?=
+
+                        $this->render('editForm', [
+                            'model' => $model,
+                            'backenddata' => $backendData,
+                            'prodId' => $prodId,
+                            'modelTimes' => $modelTimes,
+                            'modelPrices' => $modelPrices,
+                            'modelEvents' => $modelEvents,
+                            'modelSources' => $modelSources,
+
+                            /*
+                                    'modelTranslations' => $modelTranslations,
+
+                                    'modelPrices' => $modelPrices,
+                                    'modelTimes' => $modelTimes
+
+                            */
+                        ]) ?>
+
+
                 </div>
-               
+
             </div>
             <!-- /.card-body-->
         </div>
         <!-- /.card -->
 
-    </div>   
- 
+    </div>
+
     <!-- /.col -->
 </div>
 

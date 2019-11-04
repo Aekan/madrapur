@@ -27,7 +27,7 @@ $this->params['body-class'] = 'login-page';
                     <?='Sign in'?>
                     <?php
 
-                    if(isset($invalid)){
+                    if(isset($invalid) && $invalid){
                         echo SweetAlert::widget([
                                                     'options' => [
                                                         'title' => "Invalid Creditentials",

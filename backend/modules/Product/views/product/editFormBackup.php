@@ -27,7 +27,7 @@
                     <!--           href="#meta"-->
                     <!--           data-toggle="tab">--><? //= Yii::t('app', 'Meta') ?><!--</a>-->
                     <!--    </li>-->
-                    <li class="nav-item">
+                    <li lass="nav-item">
                         <a class="nav-link"
                            href="#prices"
                            data-toggle="tab"><?= Yii::t('app', '$Prices') ?></a>
