@@ -56,7 +56,7 @@ use kartik\helpers\Html;
                 <div class="products-index">
 
                     <?php
-                        Pjax::begin();
+                        Pjax::begin(['id'=>'grid-pjax']);
                         if ($disableForm != 1) {
                             if ($newReservation) {
 
@@ -190,6 +190,8 @@ use kartik\helpers\Html;
 
                             Pjax::end();
 
+
+
                         } else {
                             if (isset($_POST['paid_status'])) {
                                 $paid_status = 'paid';
@@ -276,8 +278,8 @@ use kartik\helpers\Html;
 
 
                             <!-- interactive chart -->
-                            <div class="card bg-primary  card-outline collapsed-card">
-                                <div class="card-header">
+                            <div class="card bg-primary  card-outline ">
+                                <div class="card-header "    data-card-widget="collapse">
                                     <h3 class="card-title">
                                         Seller Tools
                                     </h3>
@@ -333,7 +335,7 @@ use kartik\helpers\Html;
                             </div>
 
                             <div class="card bg-primary  card-outline collapsed-card">
-                                <div class="card-header">
+                                <div class="card-header "    data-card-widget="collapse">
                                     <h3 class="card-title">
                                         <i class="fas fa-user-friends  "></i>
                                         Customer Details
@@ -369,8 +371,8 @@ use kartik\helpers\Html;
                             </div>
                             <!-- /.card -->
 
-                            <div class="card bg-primary  card-outline collapsed-card">
-                                <div class="card-header">
+                            <div class="card bg-primary  card-outline ">
+                                <div class="card-header "    data-card-widget="collapse">
                                     <h3 class="card-title">
                                         Add-ons
                                     </h3>
@@ -419,7 +421,7 @@ use kartik\helpers\Html;
 
 
 
-                            <div class="col-lg-12 customPrice " contentEditable="true" editable="true">
+                            <div class="col-lg-12 customPrice " >
                                 <div class="box box-default box-solid ">
                                     <div class="box-header  bg-blue-gradient with-border">
                                         <h3 class="box-title"></h3>
@@ -499,6 +501,8 @@ use kartik\helpers\Html;
      
         $('.bootstrap-switch-label').on('click',toggleshowcPrice);
         $('.bootstrap-switch-handle-on').on('click',toggleshowcPrice);
+      
+ 
  
      })
 

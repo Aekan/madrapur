@@ -1241,11 +1241,16 @@
             if (!isset($updateResponse)) {
                 $updateResponse = '';
             }
+
+
             if (Yii::$app->request->isAjax) {
+                if(Yii::$app->request->get('_pjax')=='#grid-pjax'){
+                    return $this->redirect('create2');
+                }
                 return $this->renderAjax(
                     'create2', [
                                  'model' => new Product(),
-                                 'allMyProducts' => Product::getAllProducts(),
+                                 'allMyProducts' => Product::getStreetProducts(),
                                  'disableForm' => $disableForm,
                                  'myPrices' => $myPrices,
                                  'countPrices' => $countPrices,
@@ -1255,6 +1260,7 @@
                 );
             }
             if(isset($oldTicket) && $oldTicket) return $this->redirect('dayover');
+
             return $this->render(
                 'create2', [
                              'model' => new Product(),
@@ -2016,7 +2022,7 @@
                 throw new ForbiddenHttpException('userCan\'t');
             }
 
-            $searchModel = new ReservationsAdminSearchModel();
+            $searchModel = new Reservations();
             $dataProvider = $searchModel->searchMyreservations(Yii::$app->request->queryParams);
             $dataProvider->setSort(
                 [

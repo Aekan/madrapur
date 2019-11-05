@@ -20,6 +20,7 @@ use backend\modules\Reservations\models\Reservations;
 use common\models\User;
 use kartik\grid\EditableColumnAction;
 use League\Uri\PublicSuffix\CurlHttpClient;
+use PhpParser\Node\Expr\Yield_;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -378,10 +379,12 @@ class ProductController extends Controller {
                     'start_date' => $postedPrice['start_date'],
                     'end_date' => $postedPrice['end_date'],
                     'discount' => $postedPrice['discount'],
-                    'price' => $postedPrice['price'],
+                    'price' => intval($postedPrice['price']),
                     'product_id' => $prodId,
                     'id' => $postedPrice['id']
                 ];
+
+
 
                 $query = ProductPrice::aSelect(ProductPrice::class, '*', ProductPrice::tableName(), 'product_id=' . $prodId . ' and id="' . $values['id'] . '"');
 
@@ -830,6 +833,7 @@ class ProductController extends Controller {
                 $b = explode(',', $productPostedBlockouts["dates"]);
                 $deletedTimesIds = array_diff($a, $b);
                 #var_dump($deletedTimesIds);
+
 
                 if (!empty($deletedTimesIds)) {
                     foreach ($deletedTimesIds as $date) {

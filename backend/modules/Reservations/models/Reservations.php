@@ -353,29 +353,25 @@ class Reservations extends MadActiveRecord {
 
     public function searchMyreservations($params) {
 
-        $what = ['*'];
-        $from = self::tableName();
         $currentUserId = \Yii::$app->user->getId();
-
-        $where = self::andWhereFilter([
-            # ['invoiceDate', '>=', $invoiceDate],
-            # ['bookingDate', '<=', $bookingDate],
-            # ['source', '=', 'Street'],
-            ['sellerId', '=', strval($currentUserId)],
-        ]);
-
-        $rows = self::aSelect(Reservations::class, $what, $from, $where);
-
+        $query=Reservations::find()->andFilterWhere(['=','sellerId',strval($currentUserId)]);
         $dataProvider = new ActiveDataProvider([
-            'query' => $rows,
-            'pagination' => [
-                'pageSize' => 15,
-            ],
-        ]);
+                                                   'query' => $query,
+                                                   'pagination' => [
+                                                       'pageSize' => 15,
+                                                   ],
+                                               ]);
+        if (!($this->load($params))) {
+            \Yii::error($this->invoiceDate);
+            return $dataProvider;
+        }
+        $query->andFilterWhere((['=', 'invoiceDate', $this->invoiceDate]));
+        $query->andFilterWhere((['LIKE', 'ticketId', $this->ticketId]));
+        $query->andFilterWhere((['LIKE', 'paidMethod', $this->paidMethod]));
 
-        $this->load($params);
 
         return $dataProvider;
+
     }
     public function searchMytransactions($params, $searchdate=NULL, $currency=NULL) {
         $currentUserId = \Yii::$app->user->getId();

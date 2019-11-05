@@ -15,33 +15,35 @@
 
 
 <?php
+
     if (Yii::$app->session->hasFlash('error')) {
         echo '<p class="has-error flashes"><span class="help-block help-block-error">' . Yii::$app->session->getFlash('error') . '</span></p>';
     } elseif (Yii::$app->session->hasFlash('success')) {
         echo '<p class="has-success flashes"><span class="help-block help-block-success">' . Yii::$app->session->getFlash('success') . '</span></p>';
     }
 
-    $form = ActiveForm::begin([
-                                  'id' => 'product-edit',
-                                  'action' => 'update?prodId=' . $prodId,
-                                  'options' => ['class' => 'product-edit', 'enctype' => 'multipart/form-data'],
+    $form = ActiveForm::begin(
+        [
+            'id' => 'product-edit',
+            'action' => 'update?prodId=' . $prodId,
+            'options' => ['class' => 'product-edit', 'enctype' => 'multipart/form-data'],
 
-                              ]); ?>
 
-
+        ]
+    ); ?>
 
 
 <div class="tab-content">
     <div class="tab-pane active" id="content">
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
                 <h4><i class="glyphicon glyphicon-time"></i> <?= Yii::t('app', 'Product Details') ?>
-                    <?= Html::submitButton('Termék Frissítése', ['class' => 'btn btn-primary prodUpdateBtn']) ?>
+                    <?= Html::submitButton('Update Product', ['class' => 'btn btn-primary prodUpdateBtn']) ?>
                 </h4>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <?= $form->field($model, 'isStreet')
-                    ->dropDownList(['yes' => 'yes','no' => 'no']);
+                    ->dropDownList(['yes' => 'yes', 'no' => 'no']);
 
                 ?>
 
@@ -51,7 +53,8 @@
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'description')->widget(froala\froalaeditor\FroalaEditorWidget::className(), [
+                <?= $form->field($model, 'description')->widget(
+                    froala\froalaeditor\FroalaEditorWidget::className(), [
                     'clientOptions' => [
 
                         'toolbarInline' => false,
@@ -59,29 +62,35 @@
                         'theme' => 'royal', //optional: dark, red, gray, royal
                         'language' => 'en_gb' // optional: ar, bs, cs, da, de, en_ca, en_gb, en_us ...
                     ]
-                ]) ?>
-                <?= $form->field($model, 'short_description')->widget(froala\froalaeditor\FroalaEditorWidget::className(), [
+                ]
+                ) ?>
+                <?= $form->field($model, 'short_description')->widget(
+                    froala\froalaeditor\FroalaEditorWidget::className(), [
                     'clientOptions' => [
                         'toolbarInline' => false,
                         'theme' => 'royal', //optional: dark, red, gray, royal
                         'language' => 'en_gb' // optional: ar, bs, cs, da, de, en_ca, en_gb, en_us ...
                     ]
-                ]) ?>
+                ]
+                ) ?>
                 <?= $form->field($model, 'category')->textInput(['maxlenght' => 60]) ?>
                 <?= $form->field($model, 'capacity')->textInput(['maxlenght' => 60]) ?>
                 <?= $form->field($model, 'duration')->textInput(['maxlenght' => 60]) ?><?= '(in minutes)' ?>
                 <?= $form->field($model, 'thumbnail')->textInput(['maxlenght' => 255]) ?>
 
-                <?= $form->field($model, 'images')->widget(FileInput::classname(), [
+                <?= $form->field($model, 'images')->widget(
+                    FileInput::classname(), [
                     'options' => ['accept' => 'image/*'],
                     'pluginOptions' => ['allowedFileExtensions' => ['jpg', 'gif', 'png'], 'showUpload' => false]
-                ]) ?>
+                ]
+                ) ?>
 
                 <?php // (!$model->isNewRecord && $model->image!='')?Html::img(Yii::$app->params['productsPictures'] . $model->image, ['style'=>'max-width: 300px;']):''; ?>
 
 
 
-                <?= $form->field($model, 'start_date')->widget(DateControl::classname(), [
+                <?= $form->field($model, 'start_date')->widget(
+                    DateControl::classname(), [
                     'ajaxConversion' => false,
                     'autoWidget' => true,
                     'displayFormat' => 'php:Y-m-d',
@@ -91,9 +100,11 @@
                             'autoclose' => true
                         ]
                     ]
-                ]); ?>
+                ]
+                ); ?>
 
-                <?= $form->field($model, 'end_date')->widget(DateControl::classname(), [
+                <?= $form->field($model, 'end_date')->widget(
+                    DateControl::classname(), [
                     'ajaxConversion' => false,
                     'autoWidget' => true,
                     /*'displayFormat' => 'php:Y-m-d H:i',
@@ -105,7 +116,8 @@
                             'autoclose' => true
                         ]
                     ]
-                ]); ?>
+                ]
+                ); ?>
 
 
                 <?= Html::submitButton('Termék Frissítése', ['class' => 'btn btn-primary']) ?>
@@ -120,48 +132,64 @@
         <?php
 
         ?>
-        <?php DynamicFormWidget::begin([
-                                           'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
-                                           'widgetBody' => '.container-items', // required: css class selector
-                                           'widgetItem' => '.item', // required: css class
-                                           'limit' => 999, // the maximum times, an element can be cloned (default 999)
-                                           'min' => 0, // 0 or 1 (default 1)
-                                           'insertButton' => '.add-item', // css class
-                                           'deleteButton' => '.remove-item', // css class
-                                           'model' => $modelPrices[0],
-                                           'formId' => 'product-edit',
-                                           'formFields' => [
-                                               'name',
-                                               'description',
-                                           ],
-                                       ]); ?>
+        <?php DynamicFormWidget::begin(
+            [
+                'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                'widgetBody' => '.container-items', // required: css class selector
+                'widgetItem' => '.item', // required: css class
+                'limit' => 999, // the maximum times, an element can be cloned (default 999)
+                'min' => 0, // 0 or 1 (default 1)
+                'insertButton' => '.add-item', // css class
+                'deleteButton' => '.remove-item', // css class
+                'model' => $modelPrices[0],
+                'formId' => 'product-edit',
+                'formFields' => [
+                    'name',
+                    'description',
+                ],
+            ]
+        ); ?>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
                 <h4>
-                    <i class="glyphicon glyphicon-euro"></i> <?= Yii::t('app', 'Product $Prices') ?>    <?= Html::submitButton('Termék Frissítése', ['class' => 'btn btn-primary prodUpdateBtn']) ?>
-                    <button type="button" class="add-item btn btn-info btn-sm float-right"><i
-                                class="glyphicon glyphicon-plus"></i> <?= Yii::t('app', 'Új') ?></button>
+                    <i class="fas fa-euro-sign  "></i> <?= Yii::t('app', 'Product $Prices') ?>
+                    <?=
+                        Html::submitButton(
+                            'Update Product', [
+                            'class'
+                            => 'btn btn-primary prodUpdateBtn'
+                        ]
+                        ) ?>
+                    <button type="button" class="add-item btn btn-primary "><i
+                                class="fas fa-plus-circle  "></i> <?= Yii::t(
+                            'app',
+                            'Add'
+                        )
+                        ?></button>
                 </h4>
             </div>
-            <div class="panel-body">
+
+
+            <div class="card-body">
                 <div class="container-items"><!-- widgetContainer -->
                     <?php foreach ($modelPrices as $i => $modelPrice): $uniqid = uniqid(); ?>
-                        <div class="item panel panel-default"><!-- widgetBody -->
-                            <div class="panel-heading">
-                                <h3 class="panel-title pull-left"><?= Yii::t('app', 'Ár') ?></h3>
+                        <div class="item card card-default card-primary"><!-- widgetBody -->
+                            <div class="card-header">
+                                <h3 class="card-title pull-left"><?= Yii::t('app', 'Price') ?></h3>
                                 <div class="float-right">
-                                    <button type="button" class="add-item btn btn-info btn-xs"><i
-                                                class="glyphicon glyphicon-plus"></i></button>
+                                    <button type="button" class="add-item btn btn-primary btn-xs"><i
+                                                class="fas fa-plus-circle fa-2x"></i></button>
                                     <button type="button" class="remove-item btn btn-danger btn-xs"><i
-                                                class="glyphicon glyphicon-minus"></i></button>
+                                                class="fas fa-minus fa-2x"></i></button>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div id="tabs<?= $uniqid ?>" class="panel-body">
+                            <div id="tabs<?= $uniqid ?>" class="card-body">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#prices<?= $uniqid ?>" data-toggle="tab"
-                                                          class="pricestab"><?= Yii::t('app', 'Tartalom') ?></a></li>
+                                                          class="pricestab"><?php /*echo Yii::t('app', 'Tartalom')
+ */?></a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="prices<?= $uniqid ?>">
@@ -185,28 +213,27 @@
                                                 <?= $form->field($modelPrice, "[{$i}]discount")->textInput() ?>
                                             </div>
                                             <div class="col-sm-4">
-                                                <?= $form->field($modelPrice, "[{$i}]start_date")->widget(DateControl::class, [
-                                                    'type' => DateControl::FORMAT_DATE,
-                                                    'ajaxConversion' => false,
-                                                    'autoWidget' => true,
-                                                    'displayFormat' => 'php:Y-m-d',
-                                                    'options' => [
-                                                        'pluginOptions' => [
-                                                            'autoclose' => true
-                                                        ]
-                                                    ]
-                                                ]); ?>
+                                                <?= $form->field($modelPrice, "[{$i}]start_date")->widget
+                                                (\kartik\date\DatePicker::class, [
+                                    //'id' => 'products-blockoutsdates',
+
+                                    'type' => \kartik\date\DatePicker::TYPE_COMPONENT_PREPEND,
+                                    'pluginOptions' => [
+                                        'format' => 'yyyy-mm-dd',
+                                        'autoclose' => true,
+                                    ]
+                                ]);?>
+
                                             </div>
                                             <div class="col-sm-4">
-                                                <?= $form->field($modelPrice, "[{$i}]end_date")->widget(DateControl::class, [
-                                                    'type' => DateControl::FORMAT_DATE,
-                                                    'ajaxConversion' => false,
-                                                    'autoWidget' => true,
-                                                    'displayFormat' => 'php:Y-m-d',
-                                                    'options' => [
-                                                        'pluginOptions' => [
-                                                            'autoclose' => true
-                                                        ]
+                                                <?= $form->field($modelPrice, "[{$i}]end_date")->widget
+                                                (\kartik\date\DatePicker::class, [
+                                                    //'id' => 'products-blockoutsdates',
+
+                                                    'type' => \kartik\date\DatePicker::TYPE_COMPONENT_PREPEND,
+                                                    'pluginOptions' => [
+                                                        'format' => 'yyyy-mm-dd',
+                                                        'autoclose' => true,
                                                     ]
                                                 ]); ?>
                                             </div>
@@ -233,48 +260,60 @@
 
         <?php
 
-            DynamicFormWidget::begin([
-                                         'widgetContainer' => 'dynamicform_wrapper_times', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
-                                         'widgetBody' => '.container-items-times', // required: css class selector
-                                         'widgetItem' => '.item-times', // required: css class
-                                         'limit' => 10, // the maximum times, an element can be cloned (default 999)
-                                         'min' => 0, // 0 or 1 (default 1)
-                                         'insertButton' => '.add-item-times', // css class
-                                         'deleteButton' => '.remove-item-times', // css class
-                                         'model' => $modelTimes[0],
-                                         'formId' => 'product-edit',
-                                         'formFields' => [
-                                             'name',
-                                         ],
-                                     ]);
+            DynamicFormWidget::begin(
+                [
+                    'widgetContainer' => 'dynamicform_wrapper_times', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                    'widgetBody' => '.container-items-times', // required: css class selector
+                    'widgetItem' => '.item-times', // required: css class
+                    'limit' => 10, // the maximum times, an element can be cloned (default 999)
+                    'min' => 0, // 0 or 1 (default 1)
+                    'insertButton' => '.add-item-times', // css class
+                    'deleteButton' => '.remove-item-times', // css class
+                    'model' => $modelTimes[0],
+                    'formId' => 'product-edit',
+                    'formFields' => [
+                        'name',
+                    ],
+                ]
+            );
         ?>
 
-        <div class="panel panel-default">
+        <div class="card card-primary card-outline ">
 
-            <div class="panel-heading">
-                <h4><i class="glyphicon glyphicon-time"></i> <?= Yii::t('app', 'Product Times') ?>
-                    <?= Html::submitButton('Termék Frissítése', ['class' => 'btn btn-primary prodUpdateBtn']) ?>
-                    <button type="button" class="add-item-times btn btn-info btn-sm float-right"><i
-                                class="glyphicon glyphicon-plus"></i> <?= Yii::t('app', 'Új') ?></button>
+            <div class="card-header">
+                <h4><i class="fas fa-clock"></i> <?= Yii::t('app', 'Product Times') ?>
+                    <?=
+                        Html::submitButton(
+                            'Update Product', [
+                                                'class'
+                                                => 'btn btn-primary prodUpdateBtn'
+                                            ]
+                        ) ?>
+                    <button type="button" class="add-item-times btn btn-primary "><i
+                                class="fas fa-plus-circle  "></i> <?= Yii::t(
+                            'app',
+                            'Add'
+                        )
+                        ?></button>
 
                 </h4>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div class="container-items-times"><!-- widgetContainer -->
                     <?php foreach ($modelTimes as $i => $modelTime): ?>
-                        <div class="item-times panel panel-default"><!-- widgetBody -->
-                            <div class="panel-heading">
+                        <div class="item-times card card-default card-primary"><!-- widgetBody -->
+                            <div class="card-header">
 
-                                <h3 class="panel-title pull-left"><?= Yii::t('app', 'Időpont') ?></h3>
+                                <h3 class="card-title pull-left"><?= Yii::t('app', 'Time') ?></h3>
                                 <div class="float-right">
-                                    <button type="button" class="add-item-times btn btn-info btn-xs"><i
-                                                class="glyphicon glyphicon-plus"></i></button>
+                                    <button type="button" class="add-item-times btn btn-primary btn-xs"><i
+                                                class="fas fa-plus-circle fa-2x"></i></button>
                                     <button type="button" class="remove-item-times btn btn-danger btn-xs"><i
-                                                class="glyphicon glyphicon-minus"></i></button>
+                                                class="fas fa-minus fa-2x"></i></button>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php
                                     // necessary for update action.
 
@@ -291,7 +330,8 @@
                                     </div>
                                     <div class="col-sm-6">
 
-                                        <?= $form->field($modelTime, "[{$i}]start_date")->widget(DateControl::class, [
+                                        <?= $form->field($modelTime, "[{$i}]start_date")->widget(
+                                            DateControl::class, [
                                             'type' => DateControl::FORMAT_DATE,
                                             'ajaxConversion' => false,
                                             'autoWidget' => true,
@@ -301,10 +341,12 @@
                                                     'autoclose' => true
                                                 ]
                                             ]
-                                        ]); ?>
+                                        ]
+                                        ); ?>
                                     </div>
                                     <div class="col-sm-6">
-                                        <?= $form->field($modelTime, "[{$i}]end_date")->widget(DateControl::classname(), [
+                                        <?= $form->field($modelTime, "[{$i}]end_date")->widget(
+                                            DateControl::classname(), [
                                             'type' => DateControl::FORMAT_DATE,
                                             'ajaxConversion' => false,
                                             'autoWidget' => true,
@@ -314,7 +356,8 @@
                                                     'autoclose' => true
                                                 ]
                                             ]
-                                        ]); ?>
+                                        ]
+                                        ); ?>
                                     </div>
                                 </div><!-- .row -->
                             </div>
@@ -330,8 +373,10 @@
 
         <?php ActiveForm::end(); ?>
 
+
         <?php
-            $this->registerJs('
+            $this->registerJs(
+                '
     $(".dynamicform_wrapper").on("beforeInsert", function(e, item) {
         console.log("beforeInsert");
     });
@@ -367,9 +412,11 @@
     $(".dynamicform_wrapper").on("limitReached", function(e, item) {
         alert("Limit elérve");
     });
-    ');
+    '
+            );
 
-            $this->registerJs('
+            $this->registerJs(
+                '
     $(".dynamicform_wrapper_times").on("beforeInsert", function(e, item) {
         console.log("beforeInsert");
     });
@@ -392,7 +439,8 @@
     $(".dynamicform_wrapper_times").on("limitReached", function(e, item) {
         alert("Limit elérve");
     });
-    ');
+    '
+            );
         ?>
 
 
@@ -402,48 +450,53 @@
 
         <?php
 
-            DynamicFormWidget::begin([
-                                         'widgetContainer' => 'dynamicform_wrapper_sources', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
-                                         'widgetBody' => '.container-items-sources', // required: css class selector
-                                         'widgetItem' => '.item-sources', // required: css class
-                                         'limit' => 10, // the maximum times, an element can be cloned (default 999)
-                                         'min' => 0, // 0 or 1 (default 1)
-                                         'insertButton' => '.add-item-sources', // css class
-                                         'deleteButton' => '.remove-item-sources', // css class
-                                         'model' => $modelSources[0],
-                                         'formId' => 'product-edit',
-                                         'formFields' => [
-                                             'name',
-                                         ],
-                                     ]);
+            DynamicFormWidget::begin(
+                [
+                    'widgetContainer' => 'dynamicform_wrapper_sources', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                    'widgetBody' => '.container-items-sources', // required: css class selector
+                    'widgetItem' => '.item-sources', // required: css class
+                    'limit' => 10, // the maximum times, an element can be cloned (default 999)
+                    'min' => 0, // 0 or 1 (default 1)
+                    'insertButton' => '.add-item-sources', // css class
+                    'deleteButton' => '.remove-item-sources', // css class
+                    'model' => $modelSources[0],
+                    'formId' => 'product-edit',
+                    'formFields' => [
+                        'name',
+                    ],
+                ]
+            );
         ?>
 
-        <div class="panel panel-default">
+        <div class="card card-primary card-outline">
 
-            <div class="panel-heading">
+            <div class="card-header">
                 <h4><i class="glyphicon glyphicon-file"></i> <?= Yii::t('app', 'Product Sources') ?>
-                    <?= Html::submitButton('Termék Frissítése', ['class' => 'btn btn-primary prodUpdateBtn']) ?>
-                    <button type="button" class="add-item-sources btn btn-info btn-sm float-right"><i
-                                class="glyphicon glyphicon-plus"></i> <?= Yii::t('app', 'Új') ?></button>
+                    <?= Html::submitButton('Update Product', ['class' => 'btn btn-primary prodUpdateBtn']) ?>
+                    <button type="button" class="add-item-sources btn btn-primary "><i
+                                class="fas fa-plus-circle  "></i> <?= Yii::t(
+                            'app',
+                            'Add'
+                        )
+                        ?></button>
 
                 </h4>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div class="container-items-sources"><!-- widgetContainer -->
                     <?php foreach ($modelSources as $i => $modelSource): ?>
-                        <div class="item-sources panel panel-default"><!-- widgetBody -->
-                            <div class="panel-heading">
-
-                                <h3 class="panel-title pull-left"><?= Yii::t('app', 'Source') ?></h3>
+                        <div class="item-sources card card-default card-primary"><!-- widgetBody -->
+                            <div class="card-header">
+                                <h3 class="card-title pull-left"><?= Yii::t('app', 'Price') ?></h3>
                                 <div class="float-right">
-                                    <button type="button" class="add-item-sources btn btn-info btn-xs"><i
-                                                class="glyphicon glyphicon-plus"></i></button>
+                                    <button type="button" class="add-item-sources btn btn-primary btn-xs"><i
+                                                class="fas fa-plus-circle fa-2x"></i></button>
                                     <button type="button" class="remove-item-sources btn btn-danger btn-xs"><i
-                                                class="glyphicon glyphicon-minus"></i></button>
+                                                class="fas fa-minus fa-2x"></i></button>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php
                                     // necessary for update action.
 
@@ -462,9 +515,11 @@
                                         <?= $form->field($modelSource, "[{$i}]prodIds")->textInput(['class' => 'form-control']) ?>
                                     </div>
                                     <div class="col-sm-12">
-                                        <?= $form->field($modelSource, "[{$i}]color")->widget(\kartik\color\ColorInput::class, [
+                                        <?= $form->field($modelSource, "[{$i}]color")->widget(
+                                            \kartik\color\ColorInput::class, [
                                             'options' => ['placeholder' => 'Select color ...'],
-                                        ]); ?>
+                                        ]
+                                        ); ?>
                                     </div>
 
 
@@ -483,7 +538,8 @@
 
 
         <?php
-            $this->registerJs('
+            $this->registerJs(
+                '
     $(".dynamicform_wrapper").on("beforeInsert", function(e, item) {
         console.log("beforeInsert");
     });
@@ -519,9 +575,11 @@
     $(".dynamicform_wrapper").on("limitReached", function(e, item) {
         alert("Limit elérve");
     });
-    ');
+    '
+            );
 
-            $this->registerJs('
+            $this->registerJs(
+                '
     $(".dynamicform_wrapper_times").on("beforeInsert", function(e, item) {
         console.log("beforeInsert");
     });
@@ -544,7 +602,8 @@
     $(".dynamicform_wrapper_times").on("limitReached", function(e, item) {
         alert("Limit elérve");
     });
-    ');
+    '
+            );
         ?>
 
 
@@ -556,15 +615,15 @@
         ?>
 
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
                 <h4>
                     <i class="glyphicon glyphicon-euro"></i> <?= Yii::t('app', 'TimeTable') ?>    <?= Html::submitButton('Termék Frissítése', ['class' => 'btn btn-primary prodUpdateBtn']) ?>
                     <button type="button" class="add-item btn btn-info btn-sm float-right"><i
                                 class="glyphicon glyphicon-plus"></i> <?= Yii::t('app', 'Új') ?></button>
                 </h4>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <script>
 
                     var prodId =<?=$prodId?>;
@@ -614,14 +673,16 @@ EOF;
 
                 ?>
 
-                <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
-                                                                   'events' => $modelEvents,
-                                                                   'clientOptions' => [
-                                                                       'locale' => 'hu',
-                                                                       'eventClick' => new \yii\web\JsExpression($JSEventClick),
+                <?= \yii2fullcalendar\yii2fullcalendar::widget(
+                    array(
+                        'events' => $modelEvents,
+                        'clientOptions' => [
+                            'locale' => 'hu',
+                            'eventClick' => new \yii\web\JsExpression($JSEventClick),
 
-                                                                   ]
-                                                               ));
+                        ]
+                    )
+                );
 
                 ?>
 
@@ -629,6 +690,73 @@ EOF;
             </div>
 
 
+        </div>
+
+    </div>
+
+    <div class="tab-pane" id="add-ons">
+        <?php
+
+        ?>
+
+        <div
+                class="row">
+            <div
+                    class="col-12">
+                <!-- interactive chart -->
+                <div
+                        class="card card-primary card-outline">
+                    <div
+                            class="card-header">
+                        <h4>
+
+                            <i class="fas fa-plus fa-lg fa-fw  "></i>Add-ons
+                            <?=
+                                Html::submitButton(
+                                    'Update Product', [
+                                                        'class'
+                                                        => 'btn btn-primary prodUpdateBtn'
+                                                    ]
+                                ) ?>
+                        </h4>
+                        ​
+                        <div
+                                class="card-tools">
+
+                        </div>
+                    </div>
+                    <div
+                            class="card-body">
+                        ​​<?php
+
+                            foreach ($modelAddOns as $i => $modelAddOn): ?>
+                                <div class="row item-times">
+                                    <div class="col-12">
+                                        <!-- interactive chart -->
+                                        <?php
+                                            echo $form->field(
+                                                $modelAddOn, "[{$i}]id"
+                                            )->checkbox([
+                                                            'value' => $modelAddOn->id,
+                                                            'checked' => in_array($modelAddOn->id, $selectedModelAddOns),
+                                                        ])->label($modelAddOn->name);
+                                        ?>
+                                        ​
+                                    </div>
+
+                                    <!-- /.col -->
+                                </div>
+
+                            <?php endforeach; ?>
+
+                    </div>
+                    <!-- /.card-body-->
+                </div>
+                <!-- /.card -->
+                ​
+            </div>
+
+            <!-- /.col -->
         </div>
 
     </div>

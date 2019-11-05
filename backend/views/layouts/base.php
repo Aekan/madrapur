@@ -35,7 +35,7 @@ echo Html::beginTag('body',
                         Yii::$app->keyStorage->get('backend.theme-skin', 'skin-blue'),
                         Yii::$app->keyStorage->get('backend.layout-fixed') ? 'layout-fixed' : null,
                         Yii::$app->keyStorage->get('backend.layout-boxed') ? 'layout-boxed' : null,
-                        Yii::$app->keyStorage->get('backend.layout-collapsed-sidebar') ? 'sidebar-collapse' : null,
+                        Yii::$app->keyStorage->get('backend.layout-collapsed-sidebar') ? 'sidebar-collapse' : 'sidebar-collapse',
                         'sidebar-mini'
                     ])
         ])?>

@@ -71,11 +71,12 @@
                         switch ($updateResponse) {
                             case 1:
                                 $updateResponse = sessionSetFlashAlert('success','Successful Product update');
+
                                 break;
                             case 0:
 
                         }
-                        echo $updateResponse;
+
                     ?>
 
 
@@ -89,6 +90,8 @@
                             'modelPrices' => $modelPrices,
                             'modelEvents' => $modelEvents,
                             'modelSources' => $modelSources,
+                            'modelAddOns'=>$modelAddOns,
+                            'selectedModelAddOns'=>$selectedModelAddOns
 
                             /*
                                     'modelTranslations' => $modelTranslations,

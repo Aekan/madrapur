@@ -101,7 +101,7 @@ SCRIPT;
                 Selling for somebody else?
 
 
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-8">
                             <?php

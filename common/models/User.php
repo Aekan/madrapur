@@ -144,6 +144,42 @@
                 ->one();
         }
 
+        public static function getStreetSellers(){
+            $userModel = new \common\models\User();
+            $allUsers = $userModel->find()->all();
+            $streetSellers = [];
+
+
+            foreach ($allUsers as $user) {
+                $authManager = \Yii::$app->getAuthManager();
+                $hasStreetBool = $authManager->getAssignment('streetSeller', $user->id) ? true : false;
+
+                if ($hasStreetBool) {
+                    $streetSellers[] = $user;
+
+                };
+
+            }
+            return $streetSellers;
+        }
+        public static function getHotelSellers(){
+            $userModel = new \common\models\User();
+            $allUsers = $userModel->find()->all();
+            $hotelSellers = [];
+
+            foreach ($allUsers as $user) {
+                $authManager = \Yii::$app->getAuthManager();
+                $hasHotelBool = $authManager->getAssignment('hotelSeller', $user->id) ? true : false;
+
+                if ($hasHotelBool) {
+                    $hotelSellers[]  = $user;
+
+                };
+            }
+            return $hotelSellers;
+
+        }
+
         /**
          *
          * @inheritdoc

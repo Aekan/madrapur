@@ -19,8 +19,8 @@ class ReservationsAdminSearchModel extends Reservations {
             /*   [['fname'], 'string', 'max' => 255],
                [['lname'], 'string', 'max' => 255],*/
             [['data'], 'string', 'max' => 1000],
-            [['invoiceDate'], 'date', 'format' => 'yyyy-MM-dd'],
-            [['bookingDate'], 'date', 'format' => 'yyyy-MM-dd'],
+            [['invoiceDate'], 'date', 'format' => 'yyyy-mm-dd'],
+            [['bookingDate'], 'date', 'format' => 'yyyy-mm-dd'],
         ];
     }
 
@@ -52,29 +52,31 @@ class ReservationsAdminSearchModel extends Reservations {
 
     public function searchMyreservations($params) {
 
-        $what = ['*'];
-        $from = self::tableName();
+
         $currentUserId = \Yii::$app->user->getId();
 
-        $where = self::andWhereFilter([
-            # ['invoiceDate', '>=', $invoiceDate],
-            # ['bookingDate', '<=', $bookingDate],
-            # ['source', '=', 'Street'],
-            ['sellerId', '=', strval($currentUserId)],
-        ]);
 
-        $rows = self::aSelect(ReservationsAdminSearchModel::class, $what, $from, $where);
+        $query=Reservations::find()->andFilterWhere(['=','sellerId',strval($currentUserId)]);
+
+
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $rows,
+            'query' => $query,
             'pagination' => [
                 'pageSize' => 15,
             ],
         ]);
 
-        $this->load($params);
+        if (!($this->load($params))) {
+            \Yii::error($this->invoiceDate);
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere((['=', 'invoiceDate', $this->invoiceDate]));
+
 
         return $dataProvider;
+
     }
 
     public function searchAllreservations($params) {

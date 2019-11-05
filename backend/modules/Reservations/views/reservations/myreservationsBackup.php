@@ -166,7 +166,7 @@ use insolita\adminlte3\LteSmallBox;
                 'filterWidgetOptions'=>[
                     'pluginOptions'=>['format'=>'yyyy-mm-dd']
                 ],
-
+              
             ],
             [
                 'class' => 'kartik\grid\ActionColumn',
@@ -204,14 +204,16 @@ use insolita\adminlte3\LteSmallBox;
                                             'responsiveWrap'=>false,
                                             'panel'=>[
                                                 'heading'=>'<h5 class="panel-title"><i class="fas fa-book"></i>  My Bookings</h5>',
-                                                'before' =>  '<div style="padding-top: 7px;"><em> </em></div>',
+                                                'before' =>  '<div style="padding-top: 7px;"><em>* The table header sticks to the top in this demo as you scroll</em></div>',
                                                 'after' => false
                                             ],
                                             'toolbar' =>  [
-
+                                                ['content'=>
+                                                     Html::button('<i class="fas fa-plus"></i>', ['type'=>'button', 'title'=>'Add Book', 'class'=>'btn btn-success', 'onclick'=>'alert("This will launch the book creation form.\n\nDisabled for this demo!");']) . ' '.
+                                                     Html::a('<i class="fas fa-repeat"></i>', ['dynagrid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-outline-secondary', 'title'=>'Reset Grid'])
+                                                ],
                                                 ['content'=>'{dynagridFilter}{dynagridSort}{dynagrid}'],
                                                 '{export}',
-                                                '{toggleData}',
                                             ]
                                         ],
                                         'options'=>['id'=>'dynagrid-1'] // a unique identifier is important

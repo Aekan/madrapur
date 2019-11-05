@@ -78,6 +78,14 @@ $bundle = BackendAsset::register($this);
                 ],
                 'items'=>[
                     [
+                        'label' => Yii::t('backend', 'System Settings'),
+                        'icon' => '<i class="fas fa-cogs nav-icon "></i>',
+                        'url' => [
+                            '/system/settings'
+                        ],
+
+                    ],
+                    [
                         'label' => Yii::t('backend', 'modMail'),
                         'icon' => '<i class="fa fa-lg nav-icon fa-envelope-o"></i>',
                         'url' => [

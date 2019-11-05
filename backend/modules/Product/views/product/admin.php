@@ -103,7 +103,7 @@ use kartik\icons\Icon;
                                                         'responsiveWrap'=>false,
                                                         'panel'=>[
                                                             'heading'=>'<h5 class="panel-title"><i class="fas fa-book"></i>  Products</h5>',
-                                                            'before' =>  '<div style="padding-top: 7px;"><em>* The table header sticks to the top in this demo as you scroll</em></div>',
+                                                            'before' =>  '<div style="padding-top: 7px;"><em> </em></div>',
                                                             'after' => false
                                                         ],
                                                         'toolbar' =>  [
