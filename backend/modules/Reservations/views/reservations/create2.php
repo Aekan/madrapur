@@ -396,7 +396,9 @@ use kartik\helpers\Html;
                                                     $addOnPrice = $addOn->price;
 
                                                     if ($paid_currency == 'HUF') {
-                                                        $addOnPrice = ProductPrice::eurtohufValue($addOnPrice);
+                                                        $addOnPrice = $addOn->hufPrice ? $addOn->hufPrice :
+                                                            ProductPrice::eurtohufValue
+                                                        ($addOnPrice);
                                                     }
 
                                                     echo $form->field(

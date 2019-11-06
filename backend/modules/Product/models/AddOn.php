@@ -44,7 +44,7 @@ class AddOn extends MadActiveRecord {
 
     public function rules() {
         return [
-            [['id'], 'integer', 'max' => 11],
+            [['id'], 'integer'],
             [
                 [
                     'name',
@@ -54,13 +54,13 @@ class AddOn extends MadActiveRecord {
                 'string',
                 'max' => 255
             ],
-            [['price'], 'integer', 'max' => 999],
+            [['price','hufPrice'], 'integer'],
             [
                 [
                     'name',
                     'icon',
                     'type',
-                    'price'
+                    'price',
                 ],
                 'required',
             ],

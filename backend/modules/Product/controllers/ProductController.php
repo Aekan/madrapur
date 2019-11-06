@@ -380,6 +380,7 @@ class ProductController extends Controller {
                     'end_date' => $postedPrice['end_date'],
                     'discount' => $postedPrice['discount'],
                     'price' => intval($postedPrice['price']),
+                    'hufPrice' => intval($postedPrice['hufPrice']),
                     'product_id' => $prodId,
                     'id' => $postedPrice['id']
                 ];

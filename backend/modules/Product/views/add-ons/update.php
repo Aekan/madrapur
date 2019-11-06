@@ -32,10 +32,9 @@ use kartik\form\ActiveForm;
 
 
                     $form = ActiveForm::begin([
-                        'id' => 'create-add-on',
                         'class' => 'form-inline',
                         'options' => ['data-pjax' => true ],
-                        'action' => 'admin'
+                        'action' => 'update?id='.Yii::$app->request->get('id')
                     ]);
 
 //                echo $form->field($model, "prodId", [
@@ -60,23 +59,20 @@ use kartik\form\ActiveForm;
 
                     echo $form->field($model, 'name')
                         ->textInput([
-                            'name' => 'name',
-                            'id' => 'name',
                         ]);
 
                     echo $form->field($model, 'icon')
                         ->textInput([
-                            'name' => 'icon',
-                            'id' => 'icon',
                         ]);
 
                     echo $form->field($model, 'price')
                         ->textInput([
-                            'name' => 'price',
-                            'id' => 'price',
-                        ]);
 
-                    echo \kartik\helpers\Html::submitButton("Create add-on", [
+                        ]);
+                    echo $form->field($model, 'hufPrice')
+                        ->textInput();
+
+                    echo \kartik\helpers\Html::submitButton("Update add-on", [
                         'class' => 'btn btn-primary',
                         'name' => 'create-add-on',
                         'value' => 'save'

@@ -172,12 +172,22 @@ use insolita\adminlte3\LteSmallBox;
                 'class' => 'kartik\grid\ActionColumn',
                 'template' => '{view}',
                 'buttons' => [
-                    'view' => function ($url) {
+                    'view' => function ($url,$model) {
                         return Html::a(
-                            '<i class="fas fa-eye fa-lg "></i>',
-                            $url,
+                            '<span class="fa fa-lg fa-pencil-alt"></span>',
+                            Url::to([
+                                        'reservations/view',
+
+                                        'id'=>$model->id,
+
+                                    ]),
                             [
-                                'title' => Yii::t('backend', 'View')
+                                'title' => Yii::t('app', 'Update'),
+                                'data-pjax' => '0',
+                                'data' => [
+                                    'method' => 'post',
+                                    'pjax' => 0,
+                                ],
                             ]
                         );
                     },

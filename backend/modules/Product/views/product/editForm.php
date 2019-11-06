@@ -209,6 +209,9 @@
                                             <div class="col-sm-2">
                                                 <?= $form->field($modelPrice, "[{$i}]price")->textInput(); ?>
                                             </div>
+                                            <div class="col-sm-2">
+                                                <?= $form->field($modelPrice, "[{$i}]hufPrice")->textInput(); ?>
+                                            </div>
                                             <div class="col-sm-4">
                                                 <?= $form->field($modelPrice, "[{$i}]discount")->textInput() ?>
                                             </div>

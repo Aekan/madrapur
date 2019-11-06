@@ -45,13 +45,14 @@ $gridColumns = [
                 );
 
             },
-            'edit' => function ($url, $searchModel, $key) {
+            'edit' => function ($url, $model, $key) {
 
                 return Html::a(
                     '<span class="fa fa-lg fa-pencil-alt"></span>',
                     Url::to([
                         'add-ons/update',
-                        'prodId' => $searchModel->id,
+                        'prodId' => $model->id,
+                        'id'=>$model->id,
                         'action' => 'update'
                     ]),
                     [

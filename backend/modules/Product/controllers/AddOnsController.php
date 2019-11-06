@@ -17,6 +17,24 @@ class AddOnsController extends Controller {
      *
      * @return string
      */
+
+    public function actionUpdate(){
+        $id=Yii::$app->request->get('id');
+        $model=AddOn::findOne($id);
+        if($model->load(Yii::$app->request->post())){
+
+            if($model->save()){
+                sessionSetFlashAlert('success','Successful addon update');
+            }
+
+        }
+
+
+
+        return $this->render('update',['model'=>$model]);
+
+    }
+
     public function actionAdmin() {
         $searchModel = new AddOn();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

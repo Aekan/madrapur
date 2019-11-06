@@ -62,7 +62,9 @@
 
                                                     ['attribute'=>'notes',
                                                      'type'=>DetailView::INPUT_TEXTAREA,
-
+                                                    ],
+                                                    ['attribute'=>'allPersons',
+                                                     'type'=>DetailView::INPUT_TEXTAREA,
                                                     ],
                                                     ['attribute'=>'booking_cost',
                                                      'type'=>DetailView::INPUT_TEXTAREA,
