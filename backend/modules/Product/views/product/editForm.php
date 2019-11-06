@@ -175,7 +175,7 @@
                 <div class="container-items"><!-- widgetContainer -->
                     <?php foreach ($modelPrices as $i => $modelPrice): $uniqid = uniqid(); ?>
                         <div class="item card card-default card-primary"><!-- widgetBody -->
-                            <div class="card-header">
+                            <div class="card-header " data-card-widget="collapse">
                                 <h3 class="card-title pull-left"><?= Yii::t('app', 'Price') ?></h3>
                                 <div class="float-right">
                                     <button type="button" class="add-item btn btn-primary btn-xs"><i

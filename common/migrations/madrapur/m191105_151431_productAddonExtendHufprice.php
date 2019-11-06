@@ -4,7 +4,7 @@ use yii\db\Schema;
 use yii\db\Migration;
 
 class m191105_151431_productAddonExtendHufprice extends Migration {
-    public $tableName = "modulusProductAddons";
+    public $tableName = "modulusProductAddOns";
     public $columnName = "hufPrice";
 
     public function safeUp() {
