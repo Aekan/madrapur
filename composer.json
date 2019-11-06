@@ -109,7 +109,7 @@
 	"require-dev": {
 		"yiisoft/yii2": "2.*",
 		"yiisoft/yii2-bootstrap4": "~1.0.0",
-		"almasaeed2010/adminlte": "^3.0",
+		"almasaeed2010/adminlte": "3.0.0-rc.6",
 		"yiisoft/yii2-debug": "~2.0.0",
 		"yiisoft/yii2-gii": "dev-master",
 		"yiisoft/yii2-faker": "~2.0.0",
