@@ -15,6 +15,9 @@
             'shouldBeActivated' => false,
             'enableLoginByPass' => false,
         ],
+        'Reservations' => [
+            'class' => backend\modules\Reservations\Module::class,
+        ],
     ],
     'components' => [
         'thumbnailer' => [

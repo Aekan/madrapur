@@ -12,6 +12,7 @@ use backend\modules\Product\models\AddOn;
 use backend\modules\Product\models\Product;
 use backend\modules\Product\models\ProductAddOn;
 use backend\modules\Product\models\ProductPrice;
+    use backend\modules\Product\models\ProductTime;
     use backend\modules\Reservations\models\Reservations;
     use backend\modules\Tickets\models\TicketSearchModel;
     use kartik\date\DatePicker;
@@ -69,6 +70,10 @@ use kartik\helpers\Html;
 
                             <?php
 
+                            $model->title=Yii::$app->request->get('prodId');
+                            $model->start_date=Yii::$app->request->get('date');
+
+
                             echo $form->field($model, 'title')
                                 ->dropDownList(ArrayHelper::map($allMyProducts, 'id', 'title'),
                                                ['prompt' => 'Please select a product'])->label(false);
@@ -82,7 +87,7 @@ use kartik\helpers\Html;
                                 DatePicker::class, [
                                 'type' => DatePicker::TYPE_INLINE
                                 , 'options' => [
-                                'value' => date('Y-m-d', time()),
+
                                 'class' => 'bg-gradient-primary '
 
                                 ],
@@ -104,10 +109,15 @@ use kartik\helpers\Html;
 
 
 
+                            <?php
+                            $query = ProductTime::aSelect(ProductTime::class, '*', ProductTime::tableName(), 'product_id=' . Yii::$app->request->get('prodId'));
+                            $mytimes = $query->all();
 
+
+                            ?>
 
                             <?= $form->field($model, 'times')
-                                ->dropDownList(['prompt' => 'Please select a time']);
+                                ->dropDownList(ArrayHelper::map($mytimes,'name','name'),['prompt' => 'Please select a time']);
 
                             ?>
 
@@ -544,6 +554,7 @@ SCRIPT;
         return PricesObj;
 
     }
+    var stime="<?=Yii::$app->request->get('time')?>";
 
 
     $().ready(() => {
@@ -554,24 +565,7 @@ SCRIPT;
 
 
         $('#product-title').change(function () {
-        $.ajax({
-            url: '<?php echo Yii::$app->request->baseUrl . '/Reservations/reservations/gettimes' ?>',
-            type: 'post',
-            data: {
-                id: $(this).val(),
 
-            },
-            success: function (data) {
-                console.log(data.search);
-
-                mytimes = data.search
-                $('#myTimes').html('');
-                $('#product-times').html('<option>Please select a time</option>')
-                mytimes.forEach(myFunction)
-
-
-            }
-        });
         $.ajax({
             url: '<?php echo Yii::$app->request->baseUrl . '/Reservations/reservations/getprices' ?>',
             type: 'post',
@@ -585,9 +579,19 @@ SCRIPT;
                 $('#myPrices').html(mytimes);
 
 
+
             }
         });
     });
+    $("#product-title").trigger("change");
+    $("#product-times").val(stime);
+
+    $("#product-times").trigger("change");
+
+
+
+
+
     })
     ;
 

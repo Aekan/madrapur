@@ -33,7 +33,6 @@ use kartik\helpers\Html;
     //$this->params['breadcrumbs'][] = $this->title;
 
     $huf = Yii::$app->keyStorage->get('currency.huf-value') ? Yii::$app->keyStorage->get('currency.huf-value') : null;
-    $oldTicketId=Yii::$app->request->get('ticketId');
 ?>
 
 <!--suppress ALL -->
@@ -46,10 +45,9 @@ use kartik\helpers\Html;
 <div class="row">
     <div class="col-12">
         <!-- interactive chart -->
-        <?=$oldTicketId ? '<div class="card card-danger ">' : '<div class="card card-primary ">' ?>
             <div class="card-header">
                 <i class="fas fa-ticket-alt  "></i>
-                <?= $oldTicketId ? $oldTicketId : $a=TicketSearchModel::userNextTicketId(); ?>
+
             </div>
 
             <div class="card-body">
@@ -176,7 +174,6 @@ use kartik\helpers\Html;
 
                                     </div>
                                 </div>
-                                <?=Html::hiddenInput('ticketId', $oldTicketId);?>
 
 
                             </div>

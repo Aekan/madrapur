@@ -5,6 +5,7 @@ namespace backend\modules\Modevent\models;
 use backend\modules\MadActiveRecord\models\MadActiveRecord;
 use common\models\User;
 use common\models\UserProfile;
+use PhpParser\Node\Expr\AssignOp\Mod;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
@@ -28,6 +29,9 @@ class Modevent extends MadActiveRecord{
             [['startDate','endDate'], 'date', 'format' => 'yyyy-mm-dd'],
         ];
     }
+
+
+
 
     public function attributeLabels() {
         return [
@@ -63,6 +67,19 @@ class Modevent extends MadActiveRecord{
         return $next;
 
     }
+
+    public static function userCurrentWorkshift($username = null){
+        $username= $username ? $username : Yii::$app->user->getIdentity()->username;
+
+
+        $currentWs=Modevent::find()->andFilterWhere(['=','user',$username])->andFilterWhere(['=','status','working'])
+            ->one();
+
+        return $currentWs;
+
+
+    }
+
 
     public static function userLastWorkSpecific($username){
         $date=date('Y-m-d',strtotime('today'));
@@ -104,6 +121,8 @@ class Modevent extends MadActiveRecord{
 
         return $dataProvider;
     }
+
+    
 
 
 

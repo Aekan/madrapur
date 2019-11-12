@@ -63,6 +63,26 @@ function(calEvent, jsEvent, view) {
     $(this).css('border-color', 'red');
 }
 EOF;
+            $JSDayClick = <<<EOF
+function(date, jsEvent, view) {
+    var m=new Date(date)
+    var Year=m.getUTCFullYear();
+    var Month=m.getUTCMonth()+1;
+    var Day=m.getUTCDate();
+    if(Month<10)Month='0'+Month;
+    if(Day<10)Day='0'+Day;
+    dateString = Year+'-'+Month+'-'+Day;
+
+    urlToGoTo="/Reservations/reservations/daye?date="+dateString+"&prodId="+prodId;
+    //console.log(view);
+    window.location.href=urlToGoTo
+    //alert('Event: ' + urlToGoTo);
+
+    //alert('Source: ' + calEvent.nonstandard['field1']);
+    // change the border color just for fun
+    $(this).css('border-color', 'red');
+}
+EOF;
 
             $events = array();
             //Testing
@@ -111,6 +131,10 @@ EOF;
                                                                                    'eventClick' => new 
                                                                                    \yii\web\JsExpression
                                                                                    ($JSEventClick),
+                                                                                   'dayClick' => new
+                                                                                   \yii\web\JsExpression
+                                                                                   ($JSDayClick),
+                                                                                   ''
 
                                                                                ]
                                                                            ));

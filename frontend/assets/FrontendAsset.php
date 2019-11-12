@@ -46,6 +46,6 @@ class FrontendAsset extends AssetBundle {
         YiiAsset::class,
         BootstrapAsset::class,
         Html5shiv::class,
-        MdbAsset::class
+
     ];
 }

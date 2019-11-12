@@ -20,7 +20,7 @@ class m190305_102344_modbook extends Migration {
             'productId' => $this->string(32),
             'source' => $this->string(255)
                 ->notNull(),
-            'data' => $this->string(3000),
+            'data' => $this->text(),
             'invoiceDate' => $this->date()
                 ->notNull(),
             'bookingDate' => $this->date()

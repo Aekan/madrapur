@@ -1,10 +1,12 @@
+
 <?php
 
 use kartik\select2\Select2;
-use yii\helpers\Html;
+    use yii\helpers\ArrayHelper;
+    use yii\helpers\Html;
 use yii\web\JsExpression;
 use yii\web\View;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 
 ?>
 
@@ -94,6 +96,7 @@ SCRIPT;
                                     'allowClear' => true
                                 ],
                             ])->label('Product');
+                            $allMyProducts=\backend\modules\Product\models\Product::getStreetProducts();
 
                         ?>
                         <?php

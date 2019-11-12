@@ -98,10 +98,11 @@
 		"kartik-v/yii2-field-range": "*",
 		"warrence/yii2-kartikgii": "dev-master",
 		"kartik-v/yii2-widget-timepicker": "*",
-		"yii2mod/yii2-sweet-alert": "^1.3",
+		"aryelds/yii2-sweet-alert": "dev-master",
 		"kartik-v/yii2-dynagrid": "dev-master",
 		"kartik-v/yii2-krajee-base": "dev-master",
-		"slavkovrn/yii2-chat": "^1.0"
+		"slavkovrn/yii2-chat": "^1.0",
+		"kartik-v/yii2-number": "dev-master"
 
 	},
 	"minimum-stability": "dev",

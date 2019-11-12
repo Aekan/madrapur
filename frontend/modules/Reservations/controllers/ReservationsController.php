@@ -1589,6 +1589,9 @@
         }
 
         public function actionCreate3() {
+            if (!Yii::$app->user->can(Reservations::CREATE_BOOKING)) {
+                throw new ForbiddenHttpException('userCan\'t');
+            }
 
             $allProduct = Product::getAllProducts();
 
@@ -1799,7 +1802,7 @@
             }
             if (Yii::$app->request->isAjax) {
                 return $this->renderAjax(
-                    'create3', [
+                    'create2', [
                                  'model' => new Product(),
                                  'disableForm' => $disableForm,
                                  'myPrices' => $myprices,
@@ -1812,7 +1815,7 @@
             }
 
             return $this->render(
-                'create3', [
+                'create2', [
                              'model' => new Product(),
                              'disableForm' => $disableForm,
                              'myPrices' => $myprices,
